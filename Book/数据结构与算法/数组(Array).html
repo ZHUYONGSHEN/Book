@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        body {
+            background-color: #f5f5fa ;
+        }
+        div {
+            width: 900px;
+            height: auto;
+            margin: auto;
+            padding: 50px 30px;
+            background-color: #fff;
+            box-shadow: 0 0 3px #d6dee4;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="">
+        <pre>
+            <h1>第一章: 数组</h1>
+            <h3>创建与初始化数组</h3>
+    var createArray1 = [],
+        createArray2 = new Array(),
+        createArray3 = new Array(2);
+    var initArray1 = ['小明','小黑'],
+        initArray2 = new Array('小明','小黑');
+    <h3>数组操作</h3>
+    var numbers = [0,1,2,3,4,5,6,7,8,9];
+    numbers.push(10);
+    numbers.push(11,12);//在数组最后一位后面追加
+    console.log(numbers);//[0,1,2,3,4,5,6,7,8,9,10,11,12]
+    numbers.unshift(-1,-2); //[-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12] //在数组第一位前面追加
+    numbers.pop(); //[-2,-1,0,1,2,3,4,5,6,7,8,9,10,11] //删除数组最靠后的元素
+    numbers.shift(); //[-1,0,1,2,3,4,5,6,7,8,9,10,11] //删除数组第一个元素
+    numbers.splice(1,2);//[-1,2,3,4,5,6,7,8,9,10,11] //删除任意位置元素
+    numbers.splice(1,0,0,1); //添加任意位置元素
+            <h3>二维数组与多维数组</h3>
+    var createArray4 = [],
+        createArray4[0] = [0,1,2],
+        createArray4[1] = [3,4,5];
+        console.log(createArray4[1][2]); // 5
+            <h3>数组合并</h3>
+    var zero = 0,
+        positiveNumbers = [1,2,3],
+        negativeNumbers = [-3,-2,-1];
+    var concatNumbers = negativeNumbers.concat(zero, positiveNumbers);
+    console.log(concatNumbers); //[-3,-2,-1,0,1,2,3]
+            <h3>迭代器函数</h3>
+    var numbers = [0,1,2,3,4,5,6,7,8,9];
+    var isEven = function(x){
+            return (x % 2 == 0) ? true : false;
+     }
+    every方法会迭代数组中的每个元素,直到返回false;
+    numvers.every(isEven);
+    some方法会迭代数组中的每个元素,直到返回true;
+    numvers.some(isEven);
+    filter方法返回新数组有使函数返回true的元素组成;
+    numvers.filter(isEven);
+    map方法返回新数组的遍历方法;
+    numvers.map(isEven);
+    forEach方法迭代整个数组;
+    numvers.forEach(function(){
+        console.log((x % 2 == 0));
+    });
+    reduce方法接收一个函数作为参数,函数有四个参数(previousValue,currentValue,index,array),返回一个被叠加到累加器的值,结束返回这个累加器;
+    numvers.reduce(function(previonsValue,currentValue,index){
+        return previonsValue + currentValues;
+    });
+          <h3>搜索和排序</h3>
+    reverse方法数组内元素反序;
+    numvers.reverse();
+    sort方法排序(可传入自定义比较函数);
+    numvers.sort();
+    indexOf方法返回与参数匹配的第一个元素的索引;
+    numvers.indexOf();
+    lastIndexOf方法返回与参数匹配的最后一个元素的索引;
+    numvers.lastIndexOf();
+            <h3>输出数组为字符串</h3>
+    toString方法返回数组字符串;
+    numvers.toString();
+    join方法返回数组字符串(自定义元素分割符);
+    numvers.join();
+        </pre>
+    </div>
+</body>
+</html>

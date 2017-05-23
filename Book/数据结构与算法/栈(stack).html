@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>栈</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        body {
+            background-color: #f5f5fa ;
+        }
+        div {
+            width: 900px;
+            height: auto;
+            margin: auto;
+            padding: 50px 30px;
+            background-color: #fff;
+            box-shadow: 0 0 3px #d6dee4;
+        }
+        h1,p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+<pre>
+    <h1>第二章: 栈</h1>
+    <p>栈是一种遵从后进先出(LIFO)原则的有序集合.</p>
+    <p>新添加的或待删除的元素都保存在栈的末尾,称作栈顶,另一端就叫栈底.在栈里,新元素都靠近栈顶,旧元素都接近栈底</p>
+    <h3>栈的实现</h3>
+    function Stack (){
+        var items = [];
+        this.push = function(element){
+            items.push(element);
+        }
+        this.pop = function(){
+            return items.pop();
+        }
+        this.peek = function(){
+            return items[items.length-1];
+        }
+        this.isEmpty = function(){
+            return items.length == 0;
+        }
+        this.size = function(){
+            return items.length;
+        }
+        this.clear = function(){
+            items = [];
+        }
+        this.print = function(){
+            console.log(items.toString());
+        }
+    }
+    <h3>栈的使用</h3>
+    var stack = new Stack();
+    console.log(stack.isEmpty()); // true
+    <h3>进制转换功能</h3>
+    function baseConverter(decNumber, base){
+        var remStack = new Stack(),
+            rem,
+            baseString = "",
+            digits = '0123456789ABCDEF';
+        while(decNumber > 0){
+            rem = Math.floor(decNumber % base);
+            remStack.push(rem);
+            decNumber = Math.floor(decNumber / base);
+        }
+        while(!remStack.isEmpty()){
+            baseString += digits[renStack.pop()];
+        }
+        return baseString;
+    }
+</pre>
+</div>
+</body>
+</html>

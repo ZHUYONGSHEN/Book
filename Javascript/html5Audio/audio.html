@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音频(Audio)</title>
+    <style>
+        body{
+            overflow: hidden;
+        }
+        *{
+            padding: 0;
+            margin:0;
+        }
+        canvas{
+            position: absolute;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            z-index:11;
+            width: 100%;
+            height:100%;
+            margin: auto;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas">
+    您的浏览器不支持canvas，请更换高级版的浏览器！
+</canvas>
+<script>
+    (function () {
+        function AudioChart (obj) {
+            this.canvas = obj.containerId;
+            this.audioUrl = obj.audioUrl;
+            this.timer = null;
+            this.width = null;
+            this.height = null;
+            this.audio = null;
+            this.analyser = null;
+            this.context = null;
+            this.audioData = null;
+        };
+        AudioChart.prototype = {
+            init:function () {
+                var canvas = document.querySelector(this.canvas);
+                this.context = canvas.getContext('2d');
+                this.width = canvas.width;
+                this.height= canvas.height;
+                this.audio = document.createElement('audio');
+                this.audio.setAttribute('crossorigin','anonymous');
+                this.audio.setAttribute('autoplay',"autoplay");
+                this.audio.setAttribute('src',this.audioUrl);
+                document.body.appendChild(this.audio);
+
+                window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
+                try {
+                    var audioContext = new window.AudioContext();
+                } catch (e) {
+                    throw new Error("您的浏览器不支持！");
+                }
+                this.analyser = audioContext.createAnalyser();
+                var source = audioContext.createMediaElementSource(this.audio);
+                source.connect(this.analyser);//截取音频信号
+                this.analyser.connect(audioContext.destination);//声音连接到扬声器
+            },
+            getSource:function () {
+                /*if(this.audio.paused){
+                    return false;
+                }*/
+                this.audioData = new Uint8Array(this.analyser.frequencyBinCount);
+                this.analyser.getByteFrequencyData(this.audioData);//得到音频能量值
+                this.analyser.getByteTimeDomainData(new Uint8Array(this.analyser.fftSize));//得到频谱
+                this.context.clearRect(0, 0, this.width, this.height);
+
+                this.drawColumns(this.audioData);
+
+            },
+            drawColumns:function (data) {
+                var gradient,lineHeight,capArr=[],
+                    start=3,//从X轴何处坐标开始画
+                    lineWidth=3,//柱体宽度
+                    lineGap=6,//柱体间距
+                    dataGap=10;//每隔多少取一个数据用于绘画，意抽取片段数据来反映整体频谱规律
+                console.log(this.audioData);
+                var count=parseInt((this.width-start*2)/(lineWidth+lineGap));
+                var thisCap,drawX;
+                return function(data){
+                    for(var i=0;i<count;i++){
+                        thisCap=data[start+i*dataGap];
+                        lineHeight=parseInt(this.height-(thisCap+thisCap*0.8));
+                        /*保存帽头数组*/
+                        if(capArr[i]){
+                            if(capArr[i]>lineHeight){
+                                capArr[i]=lineHeight;
+                            }
+                        }else{
+                            capArr[i]=lineHeight;
+                        }
+                        this.context.lineWidth=lineWidth;
+                        drawX=start+(lineWidth+lineGap)*i;
+                        gradient = this.context.createLinearGradient(drawX, this.height, drawX, lineHeight);
+                        gradient.addColorStop(1, 'rgba(255,0,0,.5)');
+                        gradient.addColorStop(0.5, 'rgb(55,255,0)');
+                        gradient.addColorStop(0, 'rgba(255,255,255,.5)');
+                        /*画频谱柱条*/
+                        this.context.beginPath();
+                        this.context.strokeStyle = gradient;
+                        this.context.moveTo(drawX,this.height);
+                        this.context.lineTo(drawX,lineHeight);
+
+                        this.context.stroke();
+                        this.context.closePath();
+                        /*绘制帽头*/
+                        this.context.beginPath();
+                        this.context.lineWidth=1;
+                        this.context.fillStyle = "rgba(255,255,255,.5)";
+                        this.context.arc(drawX,capArr[i]-3,lineWidth/2,0,Math.PI*2,true);
+                        this.context.fill();
+                        this.context.closePath();
+                        capArr[i]+=0.5
+                    }
+                }
+            },
+            run:function () {
+                this.timer = setInterval(this.getSource(),10);
+            }
+        };
+        window.AudioChart = function (option) {
+            var audioChart = new AudioChart(option);
+            audioChart.init();
+            audioChart.run();
+        }
+    })(window);
+    window.onload = function () {
+        AudioChart({
+            'containerId': '#myCanvas',
+            'audioUrl': 'audio/Apologize.mp3'
+        });
+    }
+
+</script>
+</body>
+</html>

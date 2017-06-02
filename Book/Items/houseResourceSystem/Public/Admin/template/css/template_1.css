@@ -1,0 +1,22 @@
+.platform-h5house-temp{ background-color: #DDD; background-size:100% 100%;}
+.template-header{ height: 90px; }
+.template-picbg{ display: none;}
+.template-layer{ cursor: pointer; position: absolute; left: 0; top: 0; z-index: 1; width: 100%; height: 100%; background: #000; filter: alpha(opacity=70); background: rgba(0,0,0,0.7); cursor: pointer; display: none; }
+.template-layer span{ position: absolute; top: 50%; left: 50%; margin:-16px 0 0 -16px;  font-size: 32px; color: #FFF;}
+.template-tip{width: 138px; height: 12px; position: absolute; top: 10px; left: 50%; margin-left: -70px; background: url(../images/tpl1_font.png) no-repeat; background-size: 100% 100%;}
+.template-logo{width: 112px; height: 40px; position: absolute; top: 33px; left: 50%; margin-left:-56px; }
+.template-logo img{ width: 112px; height: 40px; background-size: 100% 100%;}
+.template-nav{ overflow: hidden;}
+.template-nav ul{ margin-left:-1px; border-top: 1px solid #ABABA9;  }
+.template-nav li{ float: left; position: relative; width: 50%; background: #000; filter: alpha(opacity=50); background: rgba(0,0,0,0.5); text-align: center; color: #FFF; cursor: pointer;}
+.template-nav li .template-layer{ height: 44px;}
+.template-nav li.tpl2 .template-layer,.template-nav li.tpl4 .template-layer,.template-nav li.tpl6 .template-layer,.template-nav li.tpl8 .template-layer,.template-nav li.tpl10 .template-layer{ left: 1px;}
+.template-nav li .template-layer span{font-size: 18px; margin: -9px 0 0 -9px;}
+.template-tplindex{ display: none;}
+.template-nav em{ display: block; height: 44px; line-height: 44px; border: 1px solid #ABABA9; border-width:0 0 1px 1px; }
+.template-nav img{ width: 22px; height: 22px; vertical-align: middle; margin-right:5px; }
+.template-diplay{ width: 30px; height: 30px; background: url(../images/tpl1_display.png) no-repeat; background-size: 100% 100%; margin:15px auto 0; }
+.template-bus{ position: absolute; width: 70px; height: 14px; line-height: 14px; left: 50%; margin-left: -35px; bottom: 15px;  text-align: center; background-size: 100% 100%; font-size: 12px; vertical-align: middle; color: #FFF;}
+.template-bus a{ color: #FFF; display: block;}
+.template-bus i{ width: 16px; height: 14px; float: left;background: url(../images/tpl1_logo.png); background-size: 100% 100%; }
+.platform-h5house-temp li.act .template-layer{ display: block;}

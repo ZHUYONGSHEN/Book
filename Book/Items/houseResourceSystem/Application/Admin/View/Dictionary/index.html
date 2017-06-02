@@ -1,0 +1,164 @@
+<include file="Common:header" />
+<!--主体开始-->
+<div class="ho-main">
+
+<div class="ho-header">
+      楼盘字典
+      <a href="{:U('add')}" class="btn" style="font-size: 14px;padding: 4px 20px;">增加楼盘</a>
+</div>
+<!--检索开始-->
+<div class="ho-search">
+	<form>
+		<div class="ho-search-li">
+		    <label>省份：</label>
+			<select id="province" name="province_code" class="form-control put-sm" >
+			<option value="">请选择省份</option>
+	        <!-- <volist name=":getProvince()" id="vo"> -->
+	        <option value="{$vo.adcode}">{$vo.name}</option>
+	        <!-- </volist> -->
+			</select>
+		</div>
+		<div class="ho-search-li">
+		    <label>城市：</label>
+						<select id="city" name="city_code" class="form-control put-sm" ></select>
+					</div>
+					<div class="ho-search-li">
+					    <label>区域：</label>
+			<span id="seachdistrict_div" class="select_m"><select id="country" class="form-control put-sm" name="country_code"></select></span>
+		</div>
+		<div class="ho-search-li">
+			<label>楼盘名称：</label>
+			<input type="text" name="keyword"  value="{$_GET['keyword']}" class="ho-put" placeholder="请输入">
+			<input type="hidden" id="s_adcode" name="adcode"   value="{$_GET['adcode']}"/>
+		</div>
+		<div class="ho-search-btn">
+			<input type="submit" class="ho-btn" value="搜索">
+			<a class="btn ho-btn btn1" href="{:U('index')}">重置</a>
+		</div>
+		<div class="clear"></div>
+	</form>
+</div>
+<!--检索结束-->
+<script type="text/javascript">
+var cityUrl = "{:U('getCitys')}";
+var countryUrl = "{:U('getCountrys')}";
+var selector_province = '#province';
+var selector_city = '#city';
+var selector_country = '#country';
+// 记忆所选市省区，用于列表查询
+var selected_province = "{$_GET['province_code']}";
+var selected_city = "{$_GET['city_code']}";
+var selected_country = "{$_GET['country_code']}";
+if(selected_province) {
+    $(selector_province).val(selected_province);
+    fnGetCity(selector_province, selected_city, selector_city, function() {
+        if(selected_city) {
+            $(selector_city).val(selected_city);
+        }
+        fnGetCountry(selector_city, selected_country, selector_country, function() {
+            if(selected_country) {
+                $(selector_country).val(selected_country);
+            }
+        });
+    });
+}
+// select chosen插件值改变事件
+$(selector_province).change(function() {
+    $('#s_adcode').val($(this).val());
+    fnGetCity(selector_province, selected_city, selector_city, function() { $(selector_country).html('<option value="">请选择区域</option>');});
+});
+$(selector_city).change(function() {
+    $('#s_adcode').val($(this).val());
+    fnGetCountry(selector_city, selected_country, selector_country);
+});
+$(selector_country).change(function() {
+    $('#s_adcode').val($(this).val());
+});
+// 用于编辑页面参数传递
+var s_adcode = $('#s_adcode').val();
+if(s_adcode != '') {
+    var province_adcode = s_adcode.substring(0,2)+'0000';
+    var zarr = ['11', '12', '31', '50', '81', '82'];
+    var city_adcode = '';
+    //直辖市开头
+    if(zarr.indexOf(s_adcode.substring(0,2)) != -1) {
+        city_adcode = province_adcode;
+    } else {
+        city_adcode = s_adcode.substring(0,4)+'00';
+    }
+    $(selector_province + ' option[value="' + province_adcode + '"]').attr("selected","selected");// 选中 省份
+    $(selector_province).trigger("chosen:updated");
+    fnGetCity(selector_province, city_adcode, selector_city);
+}
+</script>
+
+    <!--列表开始-->
+		<div class="ho-list">
+		<table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                   <th class="text-center" data-func="getname" style="width: 200px;">楼盘名称</th>
+                   <th class="text-center" data-column="city">城市</th>
+                   <th class="text-center" data-column="district">区域</th>
+                   <th class="text-center" data-column="detail_address" style="width: 240px;">详细地址</th>
+                   <th class="text-center" data-column="build_num">栋座</th>
+                   <th class="text-center" data-column="build_year">竣工年代</th>
+                   <th class="text-center" data-column="create_time">录入时间</th>
+                   <th class="text-center" data-column="input_user">录入人</th>
+                   <th class="text-center"  data-func="acturl">操作</th>                                   
+               </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <!--分页开始-->
+        <div class="row ho-row">
+            {$page}
+        </div>
+        <!--分页结束-->
+
+    </div>
+    <!--列表结束-->
+</div>
+<!--主体结束-->
+
+                      <script type="text/javascript">
+                      function getname(response) {
+   						 return '<a href="/Admin/Dictionary/data/id/' + response.id + '" >' + response.name + '</a> ';
+                 	  }
+                      function acturl(response) {
+      					 return '<a href="/Admin/Dictionary/edit/id/' + response.id + '" class="btn btn-primary btn-sm">编辑</a><a  onclick="deletedata(' + response.id + ')" href="javascript:;" class="btn btn-danger btn-sm ho-delete">删除</a>';
+
+      					 
+                      }
+                  	  function deletedata(id)
+                      {
+                          layer.confirm('确定要删除这个楼盘吗？删除后无法恢复。', {
+                              btn: ['确定','取消'] //按钮
+                          }, function(){
+                           //确定执行
+                          	$.ajax({
+                          		type : 'post',
+                          		url : "{:U('Dictionary/delete')}",
+                          		data : {id:id},
+                          		datatype :'json',
+                          		success : function(data)
+                          		{
+                          			if(data.status == 1)
+                          				{
+                          				layer.msg(data.info, {icon: 6});
+                      					location.href = data.url
+                          				}
+                          			else if(data.status == 0)
+                          				{
+                          				layer.msg(data.info, {icon: 5});
+                          				}
+                          		}
+                          	})
+
+                          }, function(){
+                           //取消执行
+                          });
+                      }
+                      </script> 
+</body>
+</html>

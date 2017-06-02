@@ -1,0 +1,50 @@
+<include file="Common:header_for_modal" />
+<div class="box-content">
+  <form class="form-horizontal" id="formSubmit">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">状态</label>
+      <div class="col-sm-6">
+        <label><input type="radio" name="status" value="1" checked>&nbsp;启用</label>&nbsp;
+        <label><input type="radio" name="status" value="0">&nbsp;禁用</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">账号</label>
+      <div class="col-sm-6">
+        <input type="text" name="account" class="form-control" value="{$account}">
+      </div>
+    </div>
+    <!-- <eq name="ACTION_NAME" value="add"> -->
+    <div class="form-group">
+      <label class="col-sm-2 control-label">密码</label>
+      <div class="col-sm-6">
+        <input type="password" name="password" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">重复密码</label>
+      <div class="col-sm-6">
+        <input type="password" name="repassword" class="form-control">
+      </div>
+    </div>
+    <!-- </eq> -->
+    <div class="form-group">
+      <label class="col-sm-2 control-label">描述</label>
+      <div class="col-sm-6">
+        <input type="text" name="remark" class="form-control" value="{$remark}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-6">
+        <input type="hidden" name="id" value="{$id}">
+        <button type="submit" class="btn btn-primary">提交</button>
+        <button type="button" class="btn btn-default" onclick="javascript: $.layerClose();">取消</button>
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript">
+    $('input[name="status"][value="{$status}"]').attr('checked', 'checked');
+    $.jqSubmit('#formSubmit');
+  </script>
+</div>

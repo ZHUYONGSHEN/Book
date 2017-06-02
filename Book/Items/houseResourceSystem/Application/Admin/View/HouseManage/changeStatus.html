@@ -1,0 +1,65 @@
+<include file="Common:header_for_modal" />
+<div class="box col-sm-12">
+    <div class="box-inner">
+        <div class="box-content">
+            <form class="form-horizontal" id="formSubmit" action="{:U('doHandler')}" method="post">
+                <input name="act" type="hidden" value="add">
+                <div class="form-group mb20">
+                    <label class="col-sm-1 control-label" style="text-align: center;width:200px">楼盘名称</label>
+                    <div class=" col-sm-4 ">
+                        <input placeholder='请输入' type="text" class="form-control" name="house_name" value="" />&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-group mb20">
+                    <label class="col-sm-1 control-label" style="text-align: center;width:200px">栋座</label>
+                    <div class=" col-sm-4 ">
+                        <input placeholder='请输入' type="text" class="form-control" name="house_building" value="" />&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-group mb20">
+                    <label class="col-sm-1 control-label" style="text-align: center;width:200px">单元</label>
+                    <div class=" col-sm-4 ">
+                        <input placeholder='请输入' type="text" class="form-control" name="house_cell" value="" />&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-group mb20">
+                    <label class="col-sm-1 control-label" style="text-align: center;width:200px">总层数</label>
+                    <div class=" col-sm-4 ">
+                        <input placeholder='请输入' type="text" class="form-control" name="total_floor" value="" />&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-group mb20">
+                    <label class="col-sm-1 control-label" style="text-align: center;width:200px">起始层数</label>
+                    <div class=" col-sm-4 ">
+                        <input placeholder='请输入' type="text" class="form-control" name="begin_floor" value="" />&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-group mb20">
+                    <label class="col-sm-2 control-label" style="text-align: center;width:200px">梯户类型</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input placeholder='请输入' class=" form-control col-sm-2 " type="text " name="stair" value="" />
+                            <span class="input-group-addon ">梯</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input placeholder='请输入' class="form-control col-sm-2 " type="text " name="household" value="" />
+                            <span class="input-group-addon ">户</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label "></label>
+                    <div class="col-sm-6 ">
+                        <button type="submit " class="btn btn-primary ">提交</button>
+                        <button type="button " class="btn btn-default " onclick="javascript: $.layerClose(); ">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $.jqSubmit('#formSubmit');
+</script>

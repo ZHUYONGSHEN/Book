@@ -1,0 +1,54 @@
+<div class="padding-left-zore [class1]">
+    <select data-placeholder="中介公司" id="company" class="col-sm-12 padding-left-zore padding-right-zore" data-rel="chosen"></select>
+</div>
+<!-- <if condition="[displaynum] egt 2"> -->
+<div class="padding-left-zore [class2]">
+<select data-placeholder="区域" id="area" class="col-sm-12 select-height-default" data-rel="chosen"></select>
+</div>
+<!-- </if> -->
+<!-- <if condition="[displaynum] eq 3"> -->
+<div class="padding-left-zore padding-right-zore [class3]">
+<select data-placeholder="门店" id="store" class="col-sm-12 select-height-default padding-left-zore padding-right-zore" data-rel="chosen"></select>
+</div>
+<!-- </if> -->
+<script type="text/javascript">
+$(function() {
+    /* 加载中介公司select选项 */
+    loadOptions({level: 1}, '#company', '请选择中介公司');
+    $('#company').change(function() {
+        selected_store_code = $(this).find('option:selected').attr('data-store_code');
+        $('#store_code').val(selected_store_code);
+        loadOptions({pid: $(this).val()}, '#area', '区域：全选', $(this).val(), selected_store_code);
+    });
+    /* 监听select选项 */
+    $('#area').change(function() {
+        selected_store_code = $(this).find('option:selected').attr('data-store_code');
+        $('#store_code').val(selected_store_code);
+        loadOptions({pid: $(this).val()}, '#store', '门店：全选', $(this).val(), selected_store_code);
+    });
+    $('#store').change(function() {
+        $('#store_code').val($(this).find('option:selected').attr('data-store_code'));
+    });
+    $('[data-rel="chosen"],[rel="chosen"]').chosen();
+});
+function loadOptions(param, select_selector, default_option_text, default_option_value = '', default_option_datacode = '') {
+    var str = default_option_text ? '<option data-store_code="' + default_option_datacode + '" value="' + default_option_value + '">' + default_option_text + '</option>' : '';
+    if(param == null) {
+        $(select_selector).html(str).trigger("chosen:updated");
+        return;
+    }
+    $.getJSON("{:U('getCompany')}", param, function(response) {
+        data = response.data;
+        if(typeof data != 'undefined') {
+            target_name = select_selector.substr(1);
+            for (c in data) {
+                str += '<option data-store_code="' + data[c]['store_code'] + '" value="' + data[c]['id'] + '">' + data[c][target_name + '_name'] + '</option>';
+            }
+        }
+        $(select_selector).html(str).trigger("chosen:updated");
+    });
+    if(select_selector == '#area') {
+        loadOptions(null, '#store', '门店：全选');
+    }
+}
+</script>

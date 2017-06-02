@@ -1,0 +1,73 @@
+<include file="Common:header" />
+<!--时间插件-->
+<script type="text/javascript" src="__JS__/laydate/laydate.js"></script>	
+<!--主体开始-->
+		<div class="ho-main">
+			
+			<!--检索开始-->
+			<div class="ho-search">
+				<form action="__ACTION__" method="GET" name="searchForm">
+					<div class="ho-search-li">
+						<label>日志类型：</label>
+						<select name="type">
+					        <option value="0">全部类型</option>
+					        <option value="2">楼盘字典</option>
+					        <option value="3">房源管理</option>
+					    </select>
+					</div>
+					<div class="ho-search-li">
+						<label>操作时间：</label>
+						<input name="sta_time" value="{:I('get.sta_time')}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="ho-put" placeholder="开始时间"> - 
+						<input name="end_time" value="{:I('get.end_time')}"onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="ho-put" placeholder="结束时间">
+					</div>
+					<div class="ho-search-btn">
+						<input type="submit" class="ho-btn" value="搜索">
+						<input type="reset" class="ho-btn btn1" value="重置">
+					</div>
+					<div class="clear"></div>
+				</form>
+			</div>
+			<!--检索结束-->
+			
+			<!--列表开始-->
+		<div class="ho-list">
+			<table class="table table-striped table-hover">
+				    <thead>
+				        <tr>
+				            <th data-column="note">操作内容</th>
+				            <th data-func="get_type">操作类型</th>
+				            <th data-column="create_time">操作时间</th>
+				            <th data-column="admin_name">操作人</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    </tbody>
+				</table>
+        <!--分页开始-->
+        <div class="row ho-row">
+            {$page}
+        </div>
+        <!--分页结束-->
+			</div>
+			<!--列表结束-->
+			
+		</div>
+		<!--主体结束-->
+<script type="text/javascript">
+/* 查询条件记忆 */
+if("{$_GET['type']}") {
+    $('select[name="type"]').val("{$_GET['type']}");
+}
+function get_type(response) {
+    if(response.type == 1) {
+        return '楼盘框架';
+    }else if(response.type == 2){
+        return '楼盘字典';
+    }else if(response.type ==3){
+        return '房源管理';
+    }
+}
+</script>
+
+	</body>
+</html>

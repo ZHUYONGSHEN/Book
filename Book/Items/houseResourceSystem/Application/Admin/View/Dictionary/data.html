@@ -1,0 +1,333 @@
+<include file="Common:header" />
+<!--主体开始-->
+<div class="ho-main">
+			
+			<div class="fl-main">
+				<h1>{$name}</h1>
+			</div>
+			
+			<!--选项卡开始-->
+			<div class="ho-show-tag">
+	
+				<div class="ho-tag">
+					<ul class="tag-ul">
+						<li><a href="tags1" class="ho-active">基本信息</a></li>
+						<li><a href="tags2" class="">周边设施</a></li>
+						<li><a href="tags3" id="tpsc" class="">小区图片</a></li>
+					</ul>
+					<div class="clear"></div>
+					<div class="tag-bd">
+						<div id="tags1" class="tag-li ho-active">
+							<!--信息开始-->
+							<div class="xx-show">
+								<div style="display:none" class="up-btn"><a href="floor_add1.html"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 编辑信息</a></div>
+								<table class="table">
+								    <tbody>
+								        <tr>
+								            <td class="bold">行政区：</td>
+								            <td>{$province}-{$city}-{$district}</td>
+								            <td class="bold">楼盘别名：</td>
+								            <td>{$alias|default="-"}</td>
+								            <td class="bold">小区地址：</td>
+								            <td>{$detail_address}</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">房屋用途：</td>
+								            <td>
+											<switch name="house_use">
+											    <case value="1">普通住宅</case>
+											    <case value="2">商住两用</case>
+											    <case value="3">商品房</case>
+											    <default />-
+											</switch>
+								            </td>
+								            <td class="bold">建筑类型：</td>
+								            <td>
+											<switch name="build_type">
+											    <case value="1">钢筋混凝土结构</case>
+											    <case value="2">塔板结构</case>
+											    <default />-
+											</switch>
+								            </td>
+								            <td class="bold">竣工年代：</td>
+								            <td>{$build_year|default="-"}</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">物业费用：</td>
+								            <td>{$management_price|default="-"}</td>
+								            <td class="bold">成交均价：</td>
+								            <td>{$average_price|default="-"}</td>
+								            <td class="bold">&nbsp;</td>
+								            <td>&nbsp;</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">容积率：</td>
+								            <td>{$plot_rate|default="-"}</td>
+								            <td class="bold">绿化率：</td>
+								            <td>{$green_rate|default="-"}</td>
+								            <td class="bold">总面积：</td>
+								            <td>{$build_area|default="-"}</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">总户数：</td>
+								            <td>{$household_num|default="-"}</td>
+								            <td class="bold">栋座总数：</td>
+								            <td>{$build_num|default="-"}</td>
+								            <td class="bold">车位数量：</td>
+								            <td>{$car_num|default="-"}</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">开发商：</td>
+								            <td colspan="5">{$developer|default="-"}</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">物业公司：</td>
+								            <td colspan="5">{$management|default="-"}</td>
+								        </tr>
+								        <tr>
+								            <td class="bold">小区简介：</td>
+								            <td colspan="5"><textarea style="width: 800px; min-height: 100px; max-height: 300px;">{$build_content|default="-"}</textarea></td>
+								        </tr>
+								    </tbody>
+								</table>
+							</div>
+							<!--信息结束-->
+						</div>
+						<div id="tags2" class="tag-li ">
+							<!--设施开始-->
+							<div class="ss-show">
+								<!--地图-->
+								<div style="display:none" class="ss-map">
+									<img src="__IMG__/test3.jpg">
+								</div>
+								
+								<div class="ss-txt">
+									<h3>周边交通</h3>
+									<p>{$traffic|default="-"}</p>
+									<h3>周边医院</h3>
+									<p>{$hospital|default="-"}</p>
+									<h3>周边商业</h3>
+									<p>{$business|default="-"}</p>
+								</div>
+							</div>
+							<!--设施结束-->
+						</div>
+						<div id="tags3" class="tag-li ">
+
+							<!--图片开始-->
+							<div class="xq-img">
+								<div class="add-btn" id="btn_imageuploads"><a  href="javascript:void(0)" ><span class="glyphicon glyphicon-cloud-upload"  aria-hidden="true"></span> 上传图片</a></div>
+								<div class="radio" style="width: 50%;">
+								  <label>
+								    <input type="radio" name="optionsRadios" id="" value="1">小区图
+								  </label>
+								  <label>
+								    <input type="radio" name="optionsRadios" id="" value="2" >栋座图
+								  </label>
+								  <label>
+								    <input type="radio" name="optionsRadios" id="" value="3" >户型图
+								  </label>
+								</div>
+								
+								<!--图片列表-->
+								<div class="xq-list">
+									<ul id="image_list">
+									<volist name="images" id="vo" empty="$empty">
+										<li><a href="javascript:void(0)"><img src="{$vo.img_url}"></a></li>
+									</volist>
+									</ul>
+									<div class="clear"></div>
+								</div>
+								
+							</div>
+							<!--图片结束-->
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--选项卡结束-->
+			
+		</div>
+<!--主体结束-->
+
+						<script>
+						$("input:radio[name='optionsRadios']").click(function(){
+							var img_type = $(this).val();
+							var id = {$id};
+							var modify_userlist_htm = '';
+							$.ajax({
+								type :"POST",
+								url : "{:U(MODULE_NAME.'/Dictionary/Imglist')}",
+								data : {img_type:img_type,build_id:id},
+								dataType : "json",
+								success : function(data){
+									if(data.status == 1){
+										data.list.forEach(function( list, item ) {
+											modify_userlist_htm += '<li><a href="javascript:void(0)"><img src="'+list.img_url+'"></a></li>';
+										})
+										$('#image_list').html(modify_userlist_htm);
+									}else if(data.status == 0){
+											modify_userlist_htm = '<div style="text-align:center;">暂无照片</div>';
+											$('#image_list').html(modify_userlist_htm);
+									}
+								}
+								});
+
+							});
+
+						</script>
+<script type="text/javascript">
+    var fileupload =    "{:U('Dictionary/ImgUpload')}";
+    var data_id = {:I('get.id')};
+	var url = "{:U('Dictionary/data')}"+'/id/'+data_id+'/upload/123';
+    var Imgsava =    "{:U('Dictionary/Imgsava')}";
+    var chooseSceneIdList=[];
+    var curSceneGroupId;
+    var oldSceneGroupName;
+    var _saveSceneGroup=false;
+    var albumId='${album.id}';
+    var cosAccessHost ="${fns:getCosAccessHost()}";
+    var jqXHR =null;
+    var secenefiledata
+    var fileimgarr =[]
+		var ajaxfileimgarr =[]
+	    var xhrOnProgress=function(fun) {
+	  	  xhrOnProgress.onprogress = fun; //绑定监听
+	  	  //使用闭包实现监听绑
+	  	  return function() {
+	  	    //通过$.ajaxSettings.xhr();获得XMLHttpRequest对象
+	  	    var xhr = $.ajaxSettings.xhr();
+	  	    //判断监听函数是否为函数
+	  	    if (typeof xhrOnProgress.onprogress !== 'function')
+	  	      return xhr;
+	  	    //如果有监听函数并且xhr对象支持绑定时就把监听函数绑定上去
+	  	    if (xhrOnProgress.onprogress && xhr.upload) {
+	  	      xhr.upload.onprogress = xhrOnProgress.onprogress;
+	  	    }
+	  	    return xhr;
+	  	  }
+	  	}
+		var successfilelist=0;
+		var fileimgaugment ={
+		    quality: 0.85,
+			width: 1000,
+			height: 750,
+			maxSize: 50000,
+		    before:function(){
+		    	console.log(fileimgarr)
+		    	$("#ajaxload").show();
+		    },
+		    success: function (result) {
+		    	var imgname = ''
+		    	$("#ajaxload").hide();
+		    	$("#alertboxbg").show();
+			    $("#alretboxmian").show();
+			    	imgname+= '<li class="clear alert_list"><i class="whole_img_icon fl"></i><p class="tx_over fl" style="width:180px;">'+fileimgarr[0].name
+			    	+'</p><i class="fl ml10" style="color:#859dad">等'+fileimgarr.length+'个文件</i></li>'
+			    $("#alretboxmian .grouplistname").html(imgname)
+		    }
+		}
+		var sceneGroupIds
+		var sortscennum
+</script>
+<link href="__CSS__/stage.css" rel="stylesheet"/>
+<script src="__JS__/common.js"></script>
+<script type="text/javascript" src="__JS__/filebase64-big.js" > </script>
+<script type="text/javascript" src="__JS__/file_library.js" > </script>
+    <!--上传照片-->
+<img id="originalImage" src="" style="display: none;">
+<input type="file" style="display: none;" class="hide_com fileupload" multiple="multiple" id="sencenfileupload"/>
+<div class="uploadimg_com hide_com" style="position: absolute;top:0px">
+    <form>
+        <p class="alert_title">上传照片</p>
+        <ul class="grouplistname">
+	        <li class="clear mb10 mt10 alert_list">
+	            <p style="line-height: 5px;"></p> 
+	        </li>
+        </ul>
+        <ul>
+	        <li class="clear mb10 alert_list">
+				<p class="alert_tx">选择分组:</p>
+				<select class="alert_select sceneGroup"  name="sceneGroup.id">
+				<option value="1" data-scenenum="" >小区图</option>
+				<option value="2" data-scenenum="" >栋座图</option>
+				<option value="3" data-scenenum="" >户型图</option>
+				</select>
+	        </li>
+	         <li class="clear mb10 alert_list uploadimg_com_waring_tx hide_com" style="color:#f00">
+	         xxx
+	         </li>
+         </ul>
+    </form>
+</div>
+
+<div class="uploadstar_mian hide_com">
+     <p class="alert_title clear">上传照片(<i class="alert_title_upinggrup">1/6</i>)<i class="fr uploadstar_close">x</i></i><i id="uploadstar_smalls" class="uploadstar_small fr"></i></p>
+     <div class="uploadlist_mian">
+     	<p class="color_859dad uploadingstar_group">上传到:<span class="ml20">m2</span></p>
+     	<div class="uploadstar_list">
+     		<!-- <li class="color_859dad clear">
+				<span><i class="uploadstaricon"></i></span>
+				<span class="tx_over uploadstar_list_name">sadsd</span>
+				<span class="uploadstar_list_tx"><i>排队中</i></span>
+				<span class="tx_over uploadstar_list_m"> </span>
+				<span class="uploadstar_list_size">75M</span>
+				<span class="uploadstar_list_up"><i class="londing"></i></span>
+				<span><i class="londingclose"></i></span>
+				<p class="loadbg"></p>
+     		</li>   -->
+     	</div>
+     </div>
+</div>
+<div id="sihaiload" style="background: rgb(0, 0, 0); opacity: 0.5; top: 0px; left: 0px; position: fixed; z-index: 996; height: 100%; width: 100%; display: none;"></div>
+<div id="ajaxload" class="ajaxload">
+    <div class="ajaxbg"></div>
+    <img src="__IMG__/ajax-loader.gif"  class="ajaxloadimg"/>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+			$(function(){
+				//选项卡
+				$(".ho-tag .tag-ul li a").click(function(){
+					$(".ho-tag .tag-ul li a").removeClass("ho-active");
+					$(this).addClass("ho-active");
+					$(".ho-tag .tag-bd .tag-li").removeClass("ho-active");
+					$("#"+$(this).attr("href")).addClass("ho-active");
+					return false;
+				})
+				
+
+				var panduan = "{:I('upload')}";
+				if(panduan == '123'){
+					$(".ho-tag .tag-ul li a").removeClass("ho-active");
+					$("#tpsc").addClass("ho-active");
+					$(".ho-tag .tag-bd .tag-li").removeClass("ho-active");
+					$("#tags3").addClass("ho-active");
+					return false;
+				}
+				
+			})
+		</script>
+		
+	</body>
+</html>

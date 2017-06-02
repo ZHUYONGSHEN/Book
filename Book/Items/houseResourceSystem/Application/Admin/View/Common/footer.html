@@ -1,0 +1,85 @@
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>设置</h3>
+                </div>
+                <div class="modal-body">
+                    <p>请输入内容</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">关闭</a>
+                    <a href="#" class="btn btn-primary" data-dismiss="modal">保存</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--     <footer class="row">
+        <p class="col-md-9 col-sm-9 col-xs-12 copyright">
+            <a href="#" target="_blank">底部</a>
+        </p>
+
+        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">
+            <a href="#">底部</a>
+        </p>
+    </footer> -->
+	</div>
+<!-- 日期选择器依赖此css -->
+<link rel="stylesheet" href="__CSS__/jquery-ui-1.8.21.custom.css" />
+<script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="__JS__/jquery.cookie.js"></script>
+<script src="__PUBLIC__/bower_components/responsive-tables/responsive-tables.js"></script>
+<script src="__JS__/jquery.iphone.toggle.js"></script>
+<script src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script src="__JS__/charisma.js"></script>
+<script src="__JS__/jquery.autogrow-textarea.js"></script>
+<script>
+    $(function(){
+        if($('#formSubmit').length == 1) {
+            $.jqSubmit('#formSubmit');// 默认表单Ajax提交
+        }
+        $.ajaxLoad('.ajax-load');// 按钮ajax弹窗事件
+        function warn(_warn){
+            if(typeof _warn.val() != 'undefined') {
+                var _length = _warn.val().length;
+                if (_length > 0)
+                    _warn.siblings('span.warn-message').children('b').html(_length);
+                $('input,textarea').on('input propertychange valuechange', function() {
+                    var _length = _warn.val().length;
+                    $(this).siblings('span.warn-message').children('b').html(_length);
+                });
+            }
+        }
+        $('[data-warn="warn"]').each(function() {
+            warn($(this));
+            $(this).on('keyup', function(event) {
+                warn($(this));
+            });
+        })
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-rel="chosen"],[rel="chosen"]').chosen();
+        $('.iphone-toggle').iphoneStyle();
+
+        //表单input,textarea统计剩余字数
+        $('.input-count').each(function() {
+            statInputNum($(this).find('input,textarea'), $(this).find('span'));
+        });
+        // formobj代表input或textarea的对象
+        function statInputNum(formobj, numobj) {
+            var max = numobj.text(),
+                curLength;
+            formobj[0].setAttribute("maxlength", max);
+            curLength = formobj.val().length;
+            numobj.text(max - curLength);
+            formobj.on('input propertychange', function() {
+                numobj.text(max - $(this).val().length);
+            });
+        }
+    });
+</script>
+</body>
+</html>

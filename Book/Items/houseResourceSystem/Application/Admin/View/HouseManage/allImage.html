@@ -1,0 +1,38 @@
+<!--<style>
+    .thumbnail a>img {
+        width: 100%;
+        height: 100%;
+    }
+</style>-->
+<ul>
+    <volist name="list" id="vo">
+        <li><img src="{$vo.image}">
+            <p>全景1</p>
+        </li>
+    </volist>
+</ul>
+<div class="clear"></div>
+<ul class="thumbnails mt20" style="padding-left: 0">
+    <volist name="list" id="vo">
+        <if condition="($key gt 0) and ($key % 2 eq 0)">
+            <li class="col-sm-12"></li>
+        </if>
+        <li class="thumbnail">
+            <a class="mb20" href="{$vo.image}"><img
+                    class="" src="{$vo.image}"
+                    alt="Sample Image 1"></a>
+                    nihao
+        </li>
+    </volist>
+</ul>
+<script>
+    $(function(){
+        $('.thumbnail a').colorbox({
+            rel: 'thumbnail a',
+            transition: "none",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            slideshow: false
+        });
+    })
+</script>

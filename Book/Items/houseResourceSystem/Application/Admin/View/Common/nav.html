@@ -1,0 +1,73 @@
+<!-- left menu starts -->
+<div class="col-sm-2 col-lg-2">
+    <div class="sidebar-nav">
+        <div class="nav-canvas">
+            <div class="nav-sm nav nav-stacked">
+
+            </div>
+            <ul class="nav nav-pills nav-stacked main-menu">
+                <!-- <li class="nav-header">导航</li> -->
+                <li  <if condition="$act eq Aa1">class='active'</if>>
+                    <a class="ajax-link" href="{:U('Index/index')}">
+                        <i class="glyphicon glyphicon-home"></i>
+                        <span> 首页</span>
+                    </a>
+                </li>
+
+                <li class="accordion" style="display:none">
+                    <a class="ajax-link" href="#">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        <span> 相关设置</span>
+                        <i class="glyphicon glyphicon-chevron-down pull-right "></i>
+                    </a>
+                    <ul class="nav nav-pills nav-stacked">
+         				<li class="accordion">
+                            <a href="#">
+                                <span>账号管理</span>
+                            </a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li <if condition="$act eq 'Db1'">class='active'</if>><a href="{:U('Developer/index')}">开发商管理</a></li>
+                                <li <if condition="$act eq 'Db2'">class='active'</if>><a href="{:U('Developer/rekeys')}">修改密码</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                
+                <li class="accordion">
+                    <a class="ajax-link" href="#">
+                        <i class="glyphicon glyphicon-tree-conifer"></i>
+                        <span>楼盘字典</span>
+                        <i class="glyphicon glyphicon-chevron-down pull-right "></i>
+                    </a>
+     
+                            <ul class="nav nav-pills nav-stacked">
+                                <li <if condition="$act eq 'Ed1'">class='active'</if>>
+                                    <a href="{:U('Dictionary/index')}">
+                                        <span>楼盘列表</span>
+                                    </a>
+                                </li>
+                            </ul>
+                </li>
+                
+                <li class="accordion">
+                    <a class="ajax-link" href="#">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <span>房源管理</span>
+                        <i class="glyphicon glyphicon-chevron-down pull-right "></i>
+                    </a>
+     
+                           <ul class="nav nav-pills nav-stacked">
+                                <li <if condition="$act eq 'Ec1'">class='active'</if>>
+                                    <a href="{:U('HouseManage/houseList')}">
+                                        <span>房源列表</span>
+                                    </a>
+                                </li>
+                            </ul>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        

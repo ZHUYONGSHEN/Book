@@ -1,0 +1,21 @@
+<volist name="list" id="vo">
+    <div class="imgbox">
+        <a href="{:U('allImage')}/id/{$vo.id}/group/{$vo.g}" style="text-decoration:none; ">
+        <div class="imgbox-top">
+            <img style="width: inherit" src="{$vo.image}" alt="">
+        </div>
+        <div class="imgbox-bottom">
+            {$vo.g}({$vo.sum})
+        </div></a>
+    </div>
+</volist>
+<script>
+    $(function(){
+        $('.imgbox').on('click', 'a', function(e){
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $('#all').load(url);
+            $('#alltab').tab('show');
+        });
+    })
+</script>

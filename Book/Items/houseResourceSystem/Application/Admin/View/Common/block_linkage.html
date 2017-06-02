@@ -1,0 +1,72 @@
+<div class="padding-left-zore [class1]">
+    <select name="province_code" data-placeholder="省/市/自治区" id="province" class="col-sm-12 padding-left-zore padding-right-zore" data-rel="chosen">
+        <option value="">请选择省份</option>
+        <!-- <volist name=":getProvince()" id="vo"> -->
+        <option value="{$vo.adcode}">{$vo.name}</option>
+        <!-- </volist> -->
+    </select>
+</div>
+<!-- <if condition="[displaynum] egt 2"> -->
+<div class="padding-left-zore [class2]">
+<select name="city_code" data-placeholder="市/其他" id="city" class="col-sm-12 select-height-default" data-rel="chosen"></select>
+</div>
+<!-- </if> -->
+<!-- <if condition="[displaynum] eq 3"> -->
+<div class="padding-left-zore padding-right-zore [class3]">
+<select name="country_code" data-placeholder="区/县" id="country" class="col-sm-12 select-height-default padding-left-zore padding-right-zore" data-rel="chosen"></select>
+</div>
+<!-- </if> -->
+<input type="hidden" id="s_adcode" name="adcode" value="[adcode]"/>
+
+<script type="text/javascript">
+var cityUrl = "{:U('getCitys')}";
+var countryUrl = "{:U('getCountrys')}";
+var selector_province = '#province';
+var selector_city = '#city';
+var selector_country = '#country';
+// 记忆所选市省区，用于列表查询
+var selected_province = "{$_GET['province_code']}";
+var selected_city = "{$_GET['city_code']}";
+var selected_country = "{$_GET['country_code']}";
+if(selected_province) {
+    $(selector_province).val(selected_province);
+    fnGetCity(selector_province, selected_city, selector_city, function() {
+        if(selected_city) {
+            $(selector_city).val(selected_city);
+        }
+        fnGetCountry(selector_city, selected_country, selector_country, function() {
+            if(selected_country) {
+                $(selector_country).val(selected_country);
+            }
+        });
+    });
+}
+// select chosen插件值改变事件
+$(selector_province).chosen().change(function() {
+    $('#s_adcode').val($(this).val());
+    fnGetCity(selector_province, selected_city, selector_city, function() { $(selector_country).html('<option value="">请选择区域</option>');});
+});
+$(selector_city).chosen().change(function() {
+    $('#s_adcode').val($(this).val());
+    fnGetCountry(selector_city, selected_country, selector_country);
+});
+$(selector_country).chosen().change(function() {
+    $('#s_adcode').val($(this).val());
+});
+// 用于编辑页面参数传递
+var s_adcode = $('#s_adcode').val();
+if(s_adcode != '') {
+    var province_adcode = s_adcode.substring(0,2)+'0000';
+    var zarr = ['11', '12', '31', '50', '81', '82'];
+    var city_adcode = '';
+    //直辖市开头
+    if(zarr.indexOf(s_adcode.substring(0,2)) != -1) {
+        city_adcode = province_adcode;
+    } else {
+        city_adcode = s_adcode.substring(0,4)+'00';
+    }
+    $(selector_province + ' option[value="' + province_adcode + '"]').attr("selected","selected");// 选中 省份
+    $(selector_province).trigger("chosen:updated");
+    fnGetCity(selector_province, city_adcode, selector_city);
+}
+</script>

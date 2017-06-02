@@ -1,0 +1,82 @@
+<include file="Common:header" />
+<div class="ch-container">
+    <div class="row">
+        <!-- left menu starts -->
+        <include file="Common:nav" />
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- content starts -->
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">相关设置</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">账号管理</a>
+                    </li>
+                    <li>
+                        <span>修改密码</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="box col-sm-12 relative">
+                    <div class="box-inner">
+                        <div class="box-content">
+                           <form class="form-horizontal" id="formSubmit" method="post">
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-3 col-lg-3 control-label">账号：</label>
+                                    <label class="col-sm-6 col-sm-6 col-lg-6 control-label padding-right-zero padding-left-zero" style="text-align: left;">
+                                        {:session('loginAccount')}
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-3 col-lg-3 control-label">原密码：</label>
+                                    <div class="col-sm-6 col-sm-6 col-lg-6 padding-right-zero padding-left-zero realtive">
+                                        <input class="form-control addUser" type="password" name="oldpassword" maxlength="30" placeholder="原密码" minlength="5" required>
+                                        <span class="input-messages"><b>0</b>/30</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-3 col-lg-3 control-label">新密码：</label>
+                                    <div class="col-sm-6 col-sm-6 col-lg-6 padding-right-zero padding-left-zero realtive">
+                                        <input class="form-control addUser" id="password" type="password" name="password" maxlength="30" minlength="5" placeholder="新密码" required>
+                                        <span class="input-messages"><b>0</b>/30</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-3 col-lg-3 control-label">确认密码：</label>
+                                    <div class="col-sm-6 col-sm-6 col-lg-6 padding-right-zero padding-left-zero realtive">
+                                        <input class="form-control addUser" type="password" name="confirm_password" maxlength="30" minlength="5" placeholder="确认密码" equalTo="#password" required>
+                                        <span class="input-messages"><b>0</b>/30</span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <div class="btn">
+                                         <a class="btn-full col-sm-2">
+                                            <input class="btn btn-primary" type="submit" value="提交">
+                                         </a>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- 附加样式 -->
+    <script type="text/javascript">
+    $(function(){
+        $('.addUser').on('input propertychange', function() {
+            var _length = $(this).val().length;
+            $(this).next().children("b").html(_length);
+        });
+    })
+    </script>
+<include file="Common:footer" />

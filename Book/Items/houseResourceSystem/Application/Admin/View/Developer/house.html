@@ -1,0 +1,72 @@
+<include file="Common:header" />
+<div class="ch-container">
+    <div class="row">
+    <include file="Common:nav" />
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- content starts -->
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">相关设置</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">账号管理</a>
+                    </li>
+                    <li>
+                        <a href="{:U('index')}">开发商管理</a>
+                    </li>
+                    <li>
+                        <span>楼盘</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="row">
+              <div class="box col-sm-12">
+                <div class="box-inner">
+                        <div class="box-content">
+                          <form class=" form-group form-search" method="get">
+                              <div class="row">
+                                  <div class="col-sm-12">
+                                      <a class="btn  btn-primary pull-right" href="{:U('column', array('user_id' => $_GET['id']))}">给用户id为 {$_GET['id']} 分配楼盘</a>
+                                  </div>
+                              </div>
+                            </form>
+                            <table class="table table-striped table-bordered  responsive ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" data-column="hid">楼盘ID</th>
+                                        <th class="text-center" data-column="name">楼盘名称</th>
+                                        <th class="text-center" data-func="showCity">城市</th>
+                                        <th class="text-center" data-func="showZhuangxiuStatus">装修</th>
+                                        <th class="text-center" data-column="price">房价</th>
+                                        <th class="text-center" data-column="acturl">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            {$page}
+                        </div>
+                        <script type="text/javascript">
+                          function showCity(response) {
+                            return !!response.city ? response.city : '--';
+                          }
+                          function showZhuangxiuStatus(response) {
+                            return !!response.zhuangxiu_status ? response.zhuangxiu_status : '--';
+                          }
+                        </script>
+                    </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <script type="text/javascript">
+      $('body').delegate('.btn-cancel', 'click', function() {
+        $.layerConfirm('确认取消分配？', $(this).data('url'));
+      });
+    </script>
+<include file="Common:footer" />

@@ -1,0 +1,968 @@
+/** H5分享 **/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    font-family: "DINPro-Regular";
+}
+h1,h2,h3,h4,h5,h6,em,i {
+    font-weight: 100;
+    font-style: normal
+}
+ul,ol,li {
+    list-style-type: none
+}
+a {
+    color: #666;
+    text-decoration: none;
+    outline: 0
+}
+a:hover {
+    text-decoration: none
+}
+@font-face{
+	font-family:"DINPro-Regular";
+    src: url('../fonts/DINPro-Regular.otf');
+    src: url('../fonts/DINPro-Regular.otf?#iefix') format('embedded-opentype'),
+         url('../fonts/DINPro-Regular.woff') format('woff'),
+         url('../fonts/DINPro-Regular.ttf') format('truetype'),
+         url('../fonts/DINPro-Regular.svg#WebSymbolsRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #c8cacf;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #c8cacf;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #c8cacf;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #c8cacf;
+}
+
+/* 个人微店详情 */
+.fontColorWhite{
+	color: #fff;
+}
+.fontColorRed {
+	color: #f23030;
+}
+.fontColorGreen {
+	color: #33be85;
+}
+.fontColorOrange {
+	color: #ff9b84;
+}
+.fontColorBlue {
+	color: #59abfd;
+}
+.userTel,
+.returnUpPage,
+.userImages,
+.userMessages,
+.userMessages span,
+.noAuthShi,
+.authShi,
+.noAuthQi,
+.houseDressicon,
+.houseDressMessages,
+.houseTimeMessages,
+.houseTimeicon,
+.houseTabMainListTitle,
+.houseTabMainListMessages,
+.houseTabMainList,
+.returnHome,
+.agentMan,
+.agentMan i,
+.agentMan h5,
+.yuYueHouse,
+.from-input span{
+	float: left;
+}
+.userTel,
+.authQi,
+.authShi,
+.noAuthShi,
+.noAuthQi,
+.linkeHrefIcon,
+.houseBasicMassages h4 span,
+.houseBasicTag span,
+.mapIcon,
+.timeIcon,
+.returnHomeIcon,
+.agentMan a,
+.telWhiteIcon,
+.agentMan h5 span,
+.returnBlack,
+.from-input span,
+.upDataFrom,
+.topImage img,
+.procedure img,
+.btnBuy,
+.helpMainList span{
+	display: block;
+}
+.header{
+	width: 100%;
+	height: 2.78rem;
+	background: -webkit-linear-gradient(75deg, #f9943a 40%, #ff4f19 100%);
+	background: -o-linear-gradient(75deg, #f9943a 40%, #ff4f19 100%);
+	background: linear-gradient(165deg, #f9943a 40%, #ff4f19 100%);
+}
+.returnUpPage {
+	display: block;
+	width: .16rem;
+	height: .3rem;
+	margin-top: .53rem;
+	margin-left: .3rem;
+}
+.returnUpPage {
+	background: url(../images/return.png) no-repeat center center;
+	background-size: contain;
+}
+.userTel {
+	width: .7rem;
+	height: .7rem;
+	background: url(../images/greenTel.png) no-repeat center center;
+	background-size: contain;
+}
+.authQi {
+	width: .32rem;
+	height: .32rem;
+	background: url(../images/authQi.png) no-repeat center center;
+	background-size: contain;
+}
+.noAuthQi {
+	width: .32rem;
+	height: .32rem;
+	background: url(../images/noAuthQi.png) no-repeat center center;
+	background-size: contain;
+}
+.authShi {
+	width: .32rem;
+	height: .32rem;
+	background: url(../images/authShi.png) no-repeat center center;
+	background-size: contain;
+}
+.noAuthShi {
+	width: .32rem;
+	height: .32rem;
+	background: url(../images/noAuthShi.png) no-repeat center center;
+	background-size: contain;
+}
+.headerTitle {
+	padding-top: .4rem;
+	font-size: .36rem;
+	text-align: center;
+}
+.user {
+	position: relative;
+	top: -1.1rem;
+	width: auto;
+	margin: 0rem .2rem;
+}
+.userImages {
+	width: .84rem;
+	height: .84rem;
+	border-radius: 50%;
+	border: 1px solid #dde0e7;
+}
+.userBody {
+	width: auto;
+	height: 2.2rem;
+	background: #fff;
+	padding: .45rem;
+	border-radius: 5px;
+	box-shadow: 0 2px 3px #f4c1ba 
+}
+.userMessages {
+	padding-left: .25rem;
+}
+.userMessages h4{
+	overflow: hidden;
+	margin-bottom: .1rem;
+}
+.userMessages h4 span {
+	margin-right: .1rem;
+	font-size: .36rem;
+}
+.userMessages i {
+	margin-top: .06rem;
+	margin-right: .1rem;
+}
+.useSource {
+	overflow: hidden;
+}
+.useSource span {
+	display: inline-block;
+	height: .35rem;
+	margin-right: .1rem;
+	color: #b1b1b1;
+	font-size: .22rem;
+}
+.useSource span:first-child {
+	max-width: 2.4rem;
+}
+.userMessages p{
+	max-width: 4.35rem;
+	margin-top: .1rem;
+	max-height: 1.3rem;
+	overflow:hidden;
+	color: #666;
+	font-size: .24rem;
+}
+/* 房源列表 */
+.background-f5f5fa {
+	background-color: #f5f5fa; 
+}
+.house {
+	height: auto;
+    width: auto;
+    padding-right: .1rem;
+    padding-left: .15rem;
+    padding-bottom: .3rem;
+}
+.house ul {
+	overflow:hidden;
+}
+.house li {
+	float: left;
+	width: 3.3rem;
+	padding: 0 .15rem;
+	height: auto;
+	overflow: hidden;
+}
+.house li a{
+	display: block;
+	width: inherit;
+	height: inherit;
+}
+.house li img {
+	width: 3.3rem;
+	height: 3.3rem;
+	overflow: hidden;
+}
+.hosueListImage {
+	position: relative;
+	width: 3.3rem;
+	height: 3.3rem;
+}
+.hosueListImage p {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 11;
+	width: 3.1rem;
+	height: .5rem;
+	padding-left: .2rem;
+	font-size: .28rem;
+	color: #fff;
+	line-height: .5rem;
+	overflow: hidden; 
+	background: rgba(0,0,0, .5);
+}
+.hosueListMessage h4 {
+	width: 3.1rem;
+	height: .45rem;
+	overflow: hidden;
+	margin-top: .2rem;
+	margin-bottom: .1rem;
+	padding-left: .2rem;
+	font-size: .32rem;
+	color: #232323;
+	font-weight: bolder;
+}
+.hosueListMessage p {
+	width: 3.1rem;
+	height: .35rem;
+	overflow: hidden;
+	padding-left: .2rem;
+	color: #666;
+	font-size: .24rem;
+}
+.showBottomPrompt {
+	width: 5rem;
+	height: .17rem;
+	text-align: center;
+	border-bottom: 1px solid #C8CACF;
+    margin-bottom: .4rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: .2rem;
+    color: #C8CACF;
+}
+.showBottomPrompt p {
+	width: 2rem;
+	margin: 0 auto;
+	background: #fff;
+}
+/* 新房详情 */
+.hosuseHeader {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.fixedHeader {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 112;
+	width: 100%;
+	height: .9rem;
+	opacity: 1;
+	background-color:rgba(255,255,255,0)
+	-webkit-transition: all 0.3s ease-in; 
+	transition: all 0.3s ease-in;
+}
+.hosuseHeader .fixedHeader h4 {
+	display: none;
+	background: none;
+	border-bottom: none;
+}
+.hosuseHeader .returnUpPage {
+	margin-top: .3rem;
+}
+.hosuseHeader img {
+	max-width: 100%;
+}
+.hosuseHeader .linkerUrl{
+	position: absolute;
+	right: .3rem;
+	bottom: .4rem;
+	z-index: 11;
+	display: block;
+	width: .8rem;
+	height: .8rem;
+	background: url(../images/720Icon.png) no-repeat center center;
+	background-size: contain;
+}
+.linkeHrefIcon {
+	width: .4rem;
+	height: .4rem;
+	background: url(../images/linkeHref.png) no-repeat center center;
+	background-size: contain;
+}
+.houseBasicMassages {
+	padding: .3rem .3rem .1rem .3rem;
+	margin-bottom: .4rem;
+	background: #fff;
+}
+.houseBasicMassages h4 {
+	font-size: .42rem;
+}
+.houseBasicMassages h4 i {
+	position: relative;
+    top: .06rem;
+	margin-left: .1rem;
+}
+.houseBasicMassages h4 i {
+	display: inline-block;
+}
+.houseBasicMassages h4 span{
+	float: right;
+	width: 1.07rem;
+	height: .5rem;
+	margin-right: -.3rem;
+	line-height: .5rem;
+	text-align: center;
+	color: #FFF;
+	font-size: .24rem;
+	background: #f8ae2e;
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+}
+.houseBasicPrice {
+	margin-top:.1rem;
+	margin-bottom:.1rem;
+	font-size: .3rem;
+}
+.houseBasicPrice span {
+	font-size: .42rem;
+}
+.houseBasicTag {
+	width: 100%;
+	height: auto;
+    overflow: hidden;
+}
+.houseBasicTag span {
+	float: left;
+	padding: .05rem .1rem .1rem .1rem;
+	font-size: .2rem;
+	margin-left: .1rem;
+    margin-bottom: .1rem;
+}
+.houseBasicTag span.fontColorGreen{
+	background-color: #e1f5ed; 
+}
+.houseBasicTag span.fontColorOrange{
+	background-color: #ffece8; 
+}
+.houseBasicTag span.fontColorBlue{
+	background-color: #e6f2ff; 
+}
+.mapIcon {
+	width: .24rem;
+	height: .36rem;
+	background: url(../images/mapIcon.png) no-repeat center center;
+	background-size: contain;
+} 
+.timeIcon {
+	width: .28rem;
+	height: .28rem;
+	background: url(../images/timeIcon.png) no-repeat center center;
+	background-size: contain;
+}
+.houseDressTime {
+	margin-right: -.3rem;
+}
+.houseDressTime li {
+	height: .8rem;
+	line-height: .8rem;
+	font-size: .28rem;
+	color: #666;
+}
+.houseDressicon,
+.houseTimeicon {
+	width: .55rem;
+	height: auto;
+	padding-left: .15rem;
+	margin-top: .22rem;
+	overflow: hidden;
+}
+.houseTimeMessages,
+.houseDressMessages {
+	width: 6.5rem;
+	overflow: hidden;
+}
+.houseDressMessages {
+	border-bottom: 1px solid #eaebed;
+}
+.houseTimeMessages p {
+	display: inline-block;
+	padding-right: .2rem;
+}
+.houseType {
+	width: 7.5rem;
+	height: 5.4rem;
+	overflow: hidden;
+	background: #fff;
+}
+.houseTypeTitle {
+	width: auto;
+	height: .94rem;
+	padding-left: .3rem;
+	font-size: .36rem;
+	line-height: .94rem;
+	border-bottom: 1px solid #e1e3e5;
+}
+.houseTypeTitle span {
+	color: #999;
+}
+.houseType ul {
+	position: relative;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding-left: .3rem;
+    margin-top: .3rem;
+    margin-bottom: .3rem;
+    overflow: hidden;
+}
+.houseType ul li {
+	float: left;
+	width: 3rem;
+	height: 3.84rem;
+	margin-right: .3rem;
+	overflow: hidden;
+	border: 1px solid #e1e3e5;
+}
+.houseTypeImage {
+	position: relative;
+	width: inherit;
+	height: 2.46rem;
+}
+/* .houseTypeImage img {
+	max-width: 100%;
+} */
+.houseTypeImage p{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: .5rem;
+	line-height: .5rem;
+	font-size: .25rem;
+	color: #fff;
+	text-align: center;
+	background: rgba(0,0,0, .5);
+}
+.houseTypeMessages {
+	width: inherit;
+	height: .98rem;
+	padding: .2rem;
+	background: #f5f5fa;
+}
+.houseTypeMessages p:first-child{
+	font-size: .32rem;
+	color: #232323;
+}
+.houseTypeMessages p {
+	font-size: .36rem;
+}
+.houseTypeMessages p span{
+	margin-left: .35rem;
+	color: #666;
+	font-size: .25rem;
+}
+.popUp {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, .5);
+}
+.popUpTitle {
+	width: 100%;
+	height: 1.28rem;
+	color: #FFF;
+	font-size: .36rem;
+	line-height: 1.28rem;
+	text-align: center;
+	border-bottom: 1px solid #666;
+}
+.popUpTitle a {
+	position: absolute;
+	left: .3rem;
+	top: .5rem;
+	z-index: 111;
+	margin-top: 0;
+	margin-left: 0;
+}
+.popUp .popUpMain {
+	width: 7.5rem;
+	height: auto;
+	min-height: 6rem;
+	overflow: hidden;
+}
+.popUp ul {
+	position: relative;
+	left: 0;
+	width: inherit;
+	height: auto;
+	overflow: hidden;
+}
+.popUp ul li {
+	float: left;
+	width: 7.5rem;
+	height: auto;
+}
+.popUp ul li img {
+	max-width: 100%;
+}
+.popUpFooter {
+	text-align: center;
+    margin-top: .5rem;
+	color: #fff;
+	font-size: .32rem;
+}
+.popUpFooter span {
+	color: #f23030;
+}
+.houseTab {
+	width: 6.9rem;
+    height: 100%;
+    margin-top: .4rem;
+    padding: .3rem;
+    background: #fff;
+    overflow: hidden;
+    margin-bottom: .7rem;
+}
+.houseTabTitle {
+	width: 7.5rem;
+	height: .74rem;
+	font-size: .36rem;
+	color: #999;
+	margin-left: -.3rem;
+	border-bottom: 1px solid #e1e3e5;
+}
+.houseTabTitle h4 {
+	display: inline-block;
+	width: 1.7rem;
+	text-align: center;
+	padding-bottom: .22rem;
+	margin-left: .998rem;
+	margin-right: .998rem;
+	border-bottom: 2px solid transparent;
+}
+.houseTabTitle .active {
+	color: #f23030;
+	border-bottom-color: #f23030;
+}
+.houseTabMain {
+	position: relative;
+	left: 0;
+	width: 6.9rem;
+	height: auto;
+	overflow: hidden;
+}
+.houseTabMainList {
+	width: 6.9rem;
+	height: auto;
+	overflow: hidden;
+	padding-top: .3rem;
+	padding-right: .3rem;
+	font-size: .28rem;
+}
+.houseTabMainList:last-child{
+	padding-right: 0;
+}
+.houseTabMainList h5 {
+	color: #666;
+	margin-bottom: .2rem;
+}
+.houseTabMainList p{
+	color: #232323;
+	margin-bottom: .4rem;
+}
+.houseTabMainListTitle {
+	width: 2rem;
+	height: auto;
+	overflow: hidden;
+}
+.houseTabMainListTitle p{
+	color: #666;
+}
+.houseTabMainListMessages {
+	width: 4rem;
+	height: auto;
+	overflow: hidden;
+}
+.houseTabMainListMessages p {
+	color: #232323;
+}
+.fixedMessages {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1rem;
+	box-shadow: 0 -3px 2px #f3f4f7;
+	background: #fff;
+}
+.returnHome {
+	width: 1.21rem;
+	height: .7rem;
+	padding-top: .3rem;
+	padding-left: .65rem;
+}
+.returnHomeIcon {
+	width: .45rem;
+	height: .37rem;
+	background: url(../images/houseIcon.png) no-repeat center center;
+	background-size: contain;
+}
+.telWhiteIcon {
+	width: .6rem;
+	height: .6rem;
+	background: url(../images/telWhiteIcon.png) no-repeat center center;
+	background-size: contain;
+}
+.agentMan {
+	width: 2.82rem;
+	height: 1rem;
+	background: #f8ae2e;
+}
+.agentMan a{
+	width: 2.82rem;
+	height: .6rem;
+	padding-top: .2rem;
+	padding-bottom: .2rem;
+}
+.agentMan i {
+	margin-left: .2rem;
+}
+.agentMan h5 {
+	width: 1.5rem;
+	margin-left: .2rem;
+	font-size: .2rem;
+	color: #855b14;
+}
+.agentMan h5 span {
+	width: inherit;
+	font-size: .3rem;
+	color: #fff;
+}
+.yuYueHouse {
+	width: 2.82rem;
+	height: 1rem;
+	font-size: .3rem;
+	line-height: 1rem;
+	text-align: center;
+	background: #f23030;
+}
+.yuYueHouse a{
+	color: #FFF;
+}
+/* 预约看房 */
+.hosuseHeader h4 {
+	padding-top: .2rem;
+	padding-bottom: .2rem;
+	color: #232323;
+	font-size: .36rem;
+	text-align: center;
+	background: #fff;
+	border-bottom: 1px solid #b8b8b8;
+}
+.returnBlack {
+	width: .16rem;
+	height: .3rem;
+	background: url(../images/returnBlack.png) no-repeat center center;
+	background-size: contain;
+}
+.hosuseHeader .returnBlack {
+	position: absolute;
+	top: .3rem;
+	left: .3rem;
+	z-index: 11;
+	margin-top: 0;
+	margin-left: 0;
+}
+.yuYueHouseMassages {
+	margin-top: .4rem;
+	padding-left: .3rem;
+	background: #FFF;
+}
+.from-input {
+	width: 7.2rem;
+	height: .96rem;
+	font-size: .28rem;
+	font-family:"DINPro-Regular";
+	line-height: .96rem;
+	border-bottom: 1px solid #eaebed;
+}
+.from-input span {
+	width: 1.15rem;
+	margin-right: .3rem;
+	height: inherit;
+}
+.from-input input {
+	width: 4.5rem;
+	height: .6rem;
+	margin-top: .1rem;
+	border: none;
+	color: #232323;
+	background: none !important;
+	-webkit-transition: all 0.1s ease-in; 
+	transition: all 0.1s ease-in;
+}
+.from-input input:focus,
+.yuYueHouseMassages textarea {
+	border: none;
+	outline: none;
+	box-shadow: none;
+}
+	
+.yuYueHouseMassages textarea {
+	width: 5.95rem;
+	height: 2.28rem;
+	padding-top: .3rem;
+	color: #232323;
+	padding-bottom: .3rem;
+	font-family:"DINPro-Regular";
+	-webkit-transition: all 0.1s ease-in; 
+	transition: all 0.1s ease-in;
+}
+.upDataFrom {
+	width: 6.9rem;
+	height: .9rem;
+	margin-left: .3rem;
+	margin-right: .3rem;
+	margin-top: .8rem;
+	font-size: .32rem;
+	color: #FFF;
+	text-align: center;
+	line-height: .9rem;
+	background: #f23030;
+}
+.promptBox {
+	position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 888;
+    width:100%;
+    height:100%;
+    color:#fff;
+}
+.promptBox p{
+	position:absolute;
+	left:50%;
+	top:50%;
+	width:4.5rem;
+	height:1rem;
+	font-size:.35rem;
+	margin-left: -2.25rem;
+	margin-top:-.5rem;
+	text-align: center;
+	line-height:1rem;
+	background:rgba(0,0,0, .5);
+	border-radius: 3px;
+}
+/* 红包引导 */
+.topImage {
+	width: 100%;
+	height: auto;
+}
+.topImage img,
+.procedure img {
+	max-width: 100%;
+}
+.redBagMain {
+	width: auto;
+	height: auto;
+	padding: 0 .4rem;
+	background-color: #f14b37;
+}
+.procedure {
+	position: relative;
+	width: 5.82rem;
+	height: auto;
+	padding: .44rem;
+	margin-bottom: .6rem;
+	text-align: center;
+	border-radius: 5px;
+	background-color: #fff; 
+}
+.procedure h3 {
+	position: absolute;
+	top: -.09rem;
+	left: 0;
+	right: 0;
+	z-index: 11;
+	width: 3.79rem;
+	height: .65rem;
+	font-size: .32rem;
+	color: #FFF;
+	margin: 0 auto;
+	line-height: .65rem;
+	background: url(../images/redBagTitleBg.png) no-repeat center center;
+	background-size: contain;
+}
+.procedure h4{
+	margin-top: .55rem;
+	margin-bottom: .55rem;
+	color: #9c554b;
+	font-size: .28rem;
+	text-align: left;
+}
+.procedure p{
+	margin-top: .5rem;
+	font-size: .28rem;
+	color: #9c554b;
+	line-height: .4rem;
+	text-align: left;
+}
+.btnBuy {
+	width: 7.5rem;
+	height: 1rem;
+	margin-left: -.4rem;
+	line-height: 1rem;
+	color: #fff;
+	font-size: .36rem;
+	text-align: center;
+	background-color: #ffaf30;
+}
+/* 帮助与反馈 */
+.helpMain {
+	width: 100%;
+	height: auto;
+}
+.helpMain h4 {
+	padding-left: .3rem;
+	margin-top: .14rem;
+	margin-bottom: .14rem;
+	font-size: .24rem;
+	color: #999;
+}
+.helpMainList {
+	width: auto;
+	height: auto;
+	font-size: .28rem;
+	padding-left: .3rem;
+	overflow: hidden;
+	background-color: #fff;
+}
+.helpMainList dt {
+	width: inherit;
+	height: .95rem;
+	color: #232323;
+	line-height: .95rem;
+	background: url(../images/helpTitleIconDown.png) no-repeat 95% center;
+	background-size: 4%;
+	border-bottom: 1px solid #eaebed;
+}
+.helpMainList dt.active {
+	background: url(../images/helpTitleIconUp.png) no-repeat 95% center;
+	background-size: 4%;
+}
+.helpMainList dt p {
+	color: #232323;
+}
+.helpMainList dd {
+	display: none;
+	padding-top: .3rem;
+	padding-bottom: .3rem;
+	overflow: hidden;
+	border-bottom: 1px solid #eaebed;
+}
+.helpMainList dd p,
+.helpMainList dd span{
+	color: #666;
+}
+.helpMainList span {
+	float: left;
+	width: .46rem;
+	height: inherit;
+}
+.helpMainList p {
+	float: left;
+	width: 6.44rem;
+	padding-right: .3rem;
+	color: #666;
+	height: inherit;
+}
+/* 反馈 */
+.upData {
+	position: absolute;
+	right: .3rem;
+	top: .3rem;
+	z-index: 11;
+	color: #4384f0;
+	font-size: .32rem;
+}

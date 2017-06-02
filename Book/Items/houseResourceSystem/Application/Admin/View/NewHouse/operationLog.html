@@ -1,0 +1,87 @@
+<include file="Common:header" />
+<!--主体开始-->
+        <div class="ho-main">
+          <br />
+          <include file="Common:itemHeadInfo" />
+          <br />
+          <div class="background-white border">
+            <div class="tableTitle border-bottom">
+              <a href="{:U('NewHouse/detail', array('id' => $id))}">项目信息</a>
+              <a href="{:U('HouseType/index', array('id' => $id))}">户型管理</a>
+              <a href="{:U('operationLog', array('id' => $id))}" class="active">操作记录</a>
+            </div>
+            <div class="hoMain-body">
+              <br />
+              <div class="ho-list table-border-block border">
+                  <div class="table-responsive">
+                      <table class="table table-hover">
+                          <thead>
+                              <tr>
+                                <th>序号</th>
+                                <th>操作内容</th>
+                                <th>操作类型</th>
+                                <th>操作时间</th>
+                                <th>操作人</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <volist name="list" id="item">
+                              <tr>
+                                <td>{$item.index}</td>
+                                <td>{$item.operation}</td>
+                                <td>{$item.type}</td>
+                                <td>{$item.create_time}</td>
+                                <td>{$item.username}</td>
+                              </tr>
+                            </volist>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="ho-row">
+                      <div class="row">
+                          <div class="col-sm-4" style="line-height: 35px;">共 {$total_num} 条记录</div>
+                          <div class="col-sm-8 text-right">
+                              <ul class="pagination" style="margin-bottom: 0; margin-top: 0;">
+                                  <li>
+                                    <a href="{:U('operationLog', array('page' => 1, 'id' => $id))}" aria-label="Previous">
+                                      <span aria-hidden="true">首页</span>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="<if condition="$page neq 1">{:U('operationLog', array('page' => $page - 1, 'id' => $id))}<else />#</if>" aria-label="Previous">
+                                      <span aria-hidden="true">上一页</span>
+                                    </a>
+                                  </li>
+                                  <?php
+                                    for ($i = 1; $i <= $total_page; $i++) {
+                                  ?>
+                                    <li
+                                  <?php
+                                      if ($i == $page) {
+                                  ?>
+                                         class="active"
+                                  <?php
+                                      }
+                                  ?>
+                                    ><a href="<?php echo U('operationLog', array('page' => $i, 'id' => $id)) ?>"><?php echo $i; ?></a></li>
+                                  <?php
+                                    }
+                                  ?>
+                                  <li>
+                                    <a href="<if condition="$page lt $total_page">{:U('operationLog', array('page' => $page + 1, 'id' => $id))}<else />#</if>" aria-label="Next">
+                                      <span aria-hidden="true">下一页</span>
+                                    </a>
+                                  </li>
+                              </ul>
+                              <div class="input-group" style="width: 120px; display: inline-table;">
+                                  <input type="text" name="" class="form-control">
+                                  <span class="input-group-btn"><button class="btn btn-primary" id="btn-paging-jump" type="button">跳转</button></span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+    </body>
+</html>

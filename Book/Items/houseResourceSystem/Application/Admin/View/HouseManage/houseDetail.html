@@ -1,0 +1,170 @@
+<include file="Common:header" />
+
+<!--主体开始-->
+<div class="ho-main">
+    <div class="ho-show-main">
+        <div class="ho-show-img">
+            <img src="http://test.hiweixiao.com{$head_url}">
+            <!--<h3 class="am-gallery-title">主卧室</h3>-->
+        </div>
+        <div class="ho-show-title">
+            <div class="title-li1">
+                <h1>{$house_title}</h1>
+                <h3>总价：<span>￥<b>{$sell_price}</b>万</span></h3>
+            </div>
+            <div class="title-li2">
+                <ul>
+                    <li>户型<span>{$household}</span></li>
+                    <li>朝向<span>{$orientation}</span></li>
+                    <li>面积<span>{$area}㎡</span></li>
+                    <li>楼层<span>{$floor}</span></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="title-li3">
+                <p>{$address}{$house_name}{$house_building}{$room_no}</p>
+                <span>房屋来源：{$house_from}</span>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <!--选项卡开始-->
+    <div class="ho-show-tag">
+
+        <div class="ho-tag">
+            <ul class="tag-ul">
+                <li><a href="tag1" class="ho-active">房源详情</a></li>
+                <li><a href="tag2" class="">全景图</a></li>
+                <li><a href="tag3" class="">业主三证</a></li>
+            </ul>
+            <div class="clear"></div>
+            <div class="tag-bd">
+                <div id="tag1" class="tag-li ho-active">
+                    <h3>基础信息</h3>
+                    <h4>小区信息</h4>
+                    <p>
+                        <span>所在区域：{$address}</span>
+                        <span>所属楼盘：{$house_name}</span>
+                        <span>小区物业费：{$management_price}</span>
+                    </p>
+                    <h4>建筑信息</h4>
+                    <p>
+                        <span>房屋用途：{$house_use}</span>
+                        <span>建筑结构：{$build_type}</span>
+                        <span>建成年份：{$build_year}年</span>
+                        <span>梯户比例：{$stair_household}</span>
+                    </p>
+                    <h3>房源特色</h3>
+                    <h4>特色标签</h4>
+                    <p>
+                        <volist name="house_tips" id="vo">
+                            <span class="label label-info">{$vo}</span>
+                        </volist>
+                    </p>
+                    <h4>房源描述</h4>
+                    <p>
+                        {$house_description}
+                    </p>
+                </div>
+                <div id="tag2" class="tag-li">
+                    <div class="tag-list">
+                        <ul class="thumbnails">
+                            <volist name="imglist" id="vo">
+                                <li class="thumbnail"><a href="{$vo.image}"><img src="http://test.hiweixiao.com{$vo.image}"></a>
+                                    <p>全景1</p>
+                                </li>
+                            </volist>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div id="tag3" class="tag-li">
+                    <div class="tag-list">
+                        <ul>
+                            <li class="three_certificate">
+                                <div class="left">
+                                    业主身份证:
+                                </div>
+                                <div class='right'>
+                                    <notempty name="house_certificate">
+                                        <a href="{$house_certificate}"><img src="{$house_certificate}"></a>
+                                    <else />
+                                        暂未上传图片
+                                    </notempty>
+                                </div>
+                            </li>
+                            <li class="three_certificate">
+                                <div class="left">
+                                    房产证:
+                                </div>
+                                <div class='right'>
+                                    <notempty name="owner_id_card">
+                                        <a href="{$owner_id_card}"><img src="{$owner_id_card}"></a>
+                                    <else />
+                                        暂未上传图片
+                                    </notempty>
+                                </div>
+                            </li>
+                            <li class="three_certificate">
+                                <div class="left">
+                                    委托书:
+                                </div>
+                                <div class='right'>
+                                    <notempty name="owner_delegation">
+                                        <a href="{$owner_delegation}"><img src="{$owner_delegation}"></a>
+                                    <else />
+                                        暂未上传图片
+                                    </notempty>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--选项卡结束-->
+
+</div>
+<!--主体结束-->
+<link href='__PUBLIC__/bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+<script src="__PUBLIC__/bower_components/colorbox/jquery.colorbox-min.js"></script>
+<script>
+    $(function () {
+        // 看图插件
+        $('.thumbnail a').colorbox({
+            rel: 'thumbnail a',
+            transition: "none",
+            maxWidth: "70%",
+            maxHeight: "100%",
+            current: "图{current} / {total}",
+            slideshow: false
+        });
+        
+        //列表图标切换
+        $(".tag-tool a").click(function () {
+            $(".tag-tool a").removeClass("ho-active");
+            $(this).addClass("ho-active");
+            if ($("#tag-list1").hasClass("ho-active")) {
+                $(".tag-list").removeClass("tag-list-list");
+            } else {
+                $(".tag-list").addClass("tag-list-list");
+            }
+        })
+
+        //选项卡
+        $(".ho-tag .tag-ul li a").click(function () {
+            $(".ho-tag .tag-ul li a").removeClass("ho-active");
+            $(this).addClass("ho-active");
+            $(".ho-tag .tag-bd .tag-li").removeClass("ho-active");
+            $("#" + $(this).attr("href")).addClass("ho-active");
+            return false;
+        })
+
+    })
+</script>
+</body>
+</html>

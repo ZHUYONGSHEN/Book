@@ -1,0 +1,433 @@
+<include file="Common:header" />
+<style type="text/css">
+.choseType{ color: #0084ff!important; border-color: #0084ff!important; }
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{ -webkit-appearance: none !important; }
+</style>
+<script type="text/javascript" src="__JS__/common.js" ></script>
+<!--主体开始-->
+        <div class="ho-main">
+          <br />
+          <include file="Common:itemHeadInfo" />
+          <br />
+          <div class="background-white border">
+            <div class="tableTitle border-bottom">
+              <a href="{:U('NewHouse/detail', array('id' => $data['id']))}">项目信息</a>
+              <a href="{:U('HouseType/index', array('id' => $data['id']))}" class="active">户型管理</a>
+              <a href="{:U('NewHouse/operationLog', array('id' => $data['id']))}">操作记录</a>
+            </div>
+            <div class="hoMain-body houseAdmin">
+              <div class="houseAdminTypeTag border">
+                <div class="row">
+                  <div class="col-sm-3 padding-right-zero">
+                    <ul class="houseAdminTypeTagList">
+                      <li>
+                        <a href="{:U('index', array('id' => $data['id']))}" class="but">全部户型({$house_count.all})</a>
+                      </li>
+                      <li>
+                        <a href="{:U('index', array('id' => $data['id'], 'sale_type' => 1))}" class="but">在售户型({$house_count.in_sale})</a>
+                      </li>
+                      <li>
+                        <a href="{:U('index', array('id' => $data['id'], 'sale_type' => 0))}" class="but">待售户型({$house_count.for_sale})</a>
+                      </li>
+                      <li>
+                        <a href="{:U('index', array('id' => $data['id'], 'sale_type' => 2))}" class="but">已售罄({$house_count.sale_out})</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-9 padding-left-zero">
+                    <div class="houseAdminTitle border-bottom clearfix background-white">
+                      <a class="btn btn-blue pull-right BombElem" data-module="houseAdmin" data-title="新增户型">新增户型</a>
+                    </div>
+                    <div class="houseAdminBody background-white">
+                      <volist name="list" id="vo">
+                        <div class="houseAdminList border-bottom">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <img src="{$vo.house_path}" style="width: 167px; height: 116px;" alt="图片">
+                            </div>
+                            <div class="col-sm-3 EditBootstrap">
+                              <h4>{$vo.name}<i class="btn btn-green margin-left-15">{$vo.sale_str}</i></h4>
+                              <p>户型均价：{$vo.average_price}元/㎡</p>
+                              <p>建筑面积：{$vo.build_area}㎡</p>
+                            </div>
+                            <div class="col-sm-3">
+                              <p style="margin-top: 48px;">户型室数：{$vo.room_count}室{$vo.hall_count}厅{$vo.toilet_count}卫</p>
+                              <p>套内面积：{$vo.house_area}㎡</p>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="clearfix">
+                                <a class="btn btn-blue pull-right showDetail BombElem" data-module="houseAdmin" data-id="{$vo.id}" data-title="编辑户型">编辑</a>
+                                <a class="btn btn-blue pull-right margin-right-15 houseAdminDelElem" data-id="{$vo.id}">删除</a>
+                              </div>
+                              <p>朝向：{$vo.orientation}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </volist>
+                    </div>
+                    <div class="houseAdminFooter background-white">
+                      <div class="ho-row padding0">
+                        {$page}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" data-module="houseAdmin">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close outline" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">编辑联系人信息</h4>
+                </div>
+                <div class="modal-body" style="max-height: 770px; overflow-y: auto;">
+                  <form class="form-horizontal" id="huxingsForm">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="loupan_id" value="{$data['id']}">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>户型名称：</label>
+                      <div class="col-sm-8 padding-left-zero">
+                          <input type="text" name="name" class="form-control" placeholder="请输入户型名称" minlength="2" maxlength="10">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>户型均价：</label>
+                      <div class="col-sm-7 padding-left-zero">
+                          <input type="number" data-length="6" name="average_price" class="form-control" placeholder="请输入户型均价">
+                      </div>
+                      <div class="pull-left control-label">元/㎡</div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>销售状态：</label>
+                      <input type="hidden" name="sale_type" value="">
+                      <div id="sale_type" class="col-sm-7 padding-left-zero">
+                          <a class="btn btn-grayNoBackground margin-right-10">待售</a>
+                          <a class="btn btn-grayNoBackground margin-right-10">在售</a>
+                          <a class="btn btn-grayNoBackground margin-right-10">售罄</a>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>户型室数：</label>
+                      <div class="pull-left margin-right-15" style="width: 80px;">
+                        <input type="number" data-length="2" name="room_count" class="form-control" placeholder="室">
+                      </div>
+                      <div class="pull-left control-label margin-right-15">室</div>
+                      <div class="pull-left margin-right-15" style="width: 80px;">
+                        <input type="number" data-length="2" name="hall_count" class="form-control" placeholder="厅">
+                      </div>
+                      <div class="pull-left control-label margin-right-15">厅</div>
+                      <div class="pull-left margin-right-15" style="width: 80px;">
+                        <input type="number" data-length="2" name="toilet_count" class="form-control" placeholder="卫">
+                      </div>
+                      <div class="pull-left control-label margin-right-15">卫</div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>建筑面积：</label>
+                      <div class="col-sm-7 padding-left-zero">
+                          <input type="number" data-length="4" name="build_area" class="form-control" placeholder="请输入建筑面积">
+                      </div>
+                      <div class="pull-left control-label">㎡</div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>套内面积：</label>
+                      <div class="col-sm-7 padding-left-zero">
+                          <input type="number" data-length="4" name="house_area" class="form-control" placeholder="请输入套内面积">
+                      </div>
+                      <div class="pull-left control-label">㎡</div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>户型图：</label>
+                      <input type="hidden" name="house_path" value="">
+                      <div class="col-sm-7 padding-left-zero">
+                          <div class="upDataImage upDataFile" id="upDataImage" data-elemShow ="upDataImage" data-upDataUrl="{:U('Dictionary/ImgUpload')}" data-Type="png/jpg/jpeg" data-fileSize="5" data-fileWidth="1200" data-fileheight="900"></div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label"> <i class="required">*</i>户型朝向：</label>
+                      <div class="col-sm-7 padding-left-zero">
+                        <select name="orientation" class="form-control">
+                          <option value="" >朝向</option>
+                          <option value="东" >东</option>
+                          <option value="南" >南</option>
+                          <option value="西" >西</option>
+                          <option value="北" >北</option>
+                          <option value="东南" >东南</option>
+                          <option value="东北" >东北</option>
+                          <option value="西南" >西南</option>
+                          <option value="西北" >西北</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                 <div class="text-center">
+                    <span id="submit" data-type="add" class="btn btn-blue outline">保存</span>
+                    <span id="miss" class="btn btn-default outline" data-dismiss="modal">取消</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div  class="close_del_up_houseAdmin" style="display:none;">
+            <div>
+                <p class="alert_title border-bottom">提示信息</p>
+                <div class="text-center padding30">
+                    删除户型数据将无法恢复，是否继续？
+                </div>
+            </div>
+        </div>
+        <div class="promptBox" style="display:none;"><p class="background-white"></p></div>
+        <input type="file" id="fileImages" style="display: none;">
+        <script type="text/javascript">
+          // 记录切换户型状态
+          var sale_type = {$_GET['sale_type'] != null ? $_GET['sale_type'] : 4};
+          switch (sale_type) {
+            case 0: $('.houseAdminTypeTagList li').eq(2).addClass('active'); break;
+            case 1: $('.houseAdminTypeTagList li').eq(1).addClass('active'); break;
+            case 2: $('.houseAdminTypeTagList li').eq(3).addClass('active'); break;
+            default: $('.houseAdminTypeTagList li').eq(0).addClass('active'); break;
+          }
+          // 提交户型数据
+          $('#submit').click(function() {
+              var type = $(this).attr('data-Type');
+              var data = $('#huxingsForm').serialize();
+              if (type == 'add') {
+                  var url = "{:U('addHouseType')}"
+              } else {
+                  var url = "{:U('editHouseType')}"
+              }
+              $.post(url, data, function(res){
+                  var link = res.locate;
+                  if (res.status == 1) {
+                      window.location.href=link
+                  }
+              })
+          })
+          // 清楚记录
+          $('#miss').click(function() {
+              $('#submit').attr('data-Type', 'add');
+              $('#sale_type').find('a').removeClass('choseType');
+              $('#huxingsForm').find('input').not('input[name=loupan_id]').val('');
+              $('.upDataImage').attr('style', '');;
+          })
+          // 更改户型销售状态
+          $('#sale_type a').click(function(){
+            $('input[name=sale_type]').val($('#sale_type a').index(this));
+            $(this).siblings().removeClass('choseType');
+            $(this).addClass('choseType');
+          })
+          // 控制输入框长度
+          $('input[type=number]').keyup(function(){
+              var cont = $(this).val();
+              var len  = cont.length;
+              var max  = $(this).attr('data-length');
+              if (!$.isNumeric(cont) || cont == 0) {
+                  $(this).val('')
+              }
+              if (len > max) {
+                  $(this).val(cont.substring(0,max))
+              }
+          })
+          // 展示户型详细内容
+          $('.showDetail').click(function() {
+              var id = $(this).attr('data-id');
+              $('#submit').attr('data-Type', 'edit');
+              $.post("{:U('showHouseType')}", { huxing_id: id }, function(res) {
+                  var data = res.data
+                  if (res.status == 1) {
+                      $('input[name=average_price]').val(data.average_price);
+                      $('input[name=toilet_count]').val(data.toilet_count);
+                      $('input[name=hall_count]').val(data.hall_count);
+                      $('input[name=room_count]').val(data.room_count);
+                      $('input[name=build_area]').val(data.build_area);
+                      $('input[name=house_area]').val(data.house_area);
+                      $('input[name=house_path]').val(data.house_path);
+                      $('input[name=sale_type]').val(data.sale_type);
+                      $('input[name=name]').val(data.name);
+                      $('input[name=id]').val(data.id);
+                      $('select[name=orientation]').val(data.orientation);
+                      $('.upDataImage').attr('style', 'background-image:url('+ data.show_path +')');
+                      $('#sale_type a').eq(data.sale_type).addClass('choseType');
+                  }else{
+                      promptBoxHidden('错误户型数据');
+                  }
+              })
+          })
+        </script>
+        <script>
+          $(function() {
+            function promptBoxHidden(val){
+              $('.promptBox').fadeIn();
+              $('.promptBox p').text(val);
+              var clearTime = setTimeout(function(){
+                $('.promptBox').fadeOut();
+                clearTimeout(clearTime);
+              },1000);
+            }
+            $('.BombElem').click(function(){
+              var showModule,_thisText;
+                showModule = $(this).attr('data-module'),
+                _thisText = $(this).attr('data-title');
+                $(".modal[data-module='"+ showModule +"']").find('.modal-title').text(_thisText);
+              $(".modal[data-module]").fadeOut();
+              $(".modal[data-module='" + showModule+"']").fadeIn();
+              return false;
+            });
+            //关闭自定义弹框
+            $(".modal[data-module] [data-dismiss='modal']").click(function(){
+              $(this).parents('.modal[data-module]').fadeOut();
+              return false;
+            });
+            $('.houseAdminBody').on('click','.houseAdminDelElem',function(){
+              var _that = $(this);
+              var id    = _that.attr('data-id');
+              alertbox({
+                      msg: $('.close_del_up_houseAdmin').html(),
+                      tcallfn_tx:'确认',
+                      alerttap:1,
+                      tcallfn:function(){
+                        //点击删除按钮后操作
+                        $.post("{:U('delHouseType')}", { huxing_id: id }, function(res) {
+                            if (res.status == 1) {
+                                promptBoxHidden('删除成功');
+                                setTimeout(function(){ location.reload(); }, 1000);
+                            }
+                        })
+                      }
+                    })
+            });
+            var fileId = document.getElementById("fileImages")//change执行事件目标
+            imgageType = "",//文件类型
+            imgageSize = "",//文件大小
+            imageWidth = "",//宽
+            imageHeight = "",//高
+            request= "";//终止ajax上传变量
+            fileId.addEventListener("change",upLoadImage,false );
+                function upLoadImage() {
+                  var data = this.files[0];
+                    var fd = new FormData();
+                        fd.append('file', data);
+                  if (!!upDataElemName) {
+                  document.getElementById(upDataElemName).innerHTML = "";
+                }
+                (function createUpDateFile(fileData) {
+                  //是否有文件数据
+                  if (fileData) {
+                    var URL = window.URL || window.webkitURL;
+                      var blob = URL.createObjectURL(fileData);
+                      var img = new Image();
+                      var type = fileData.type.substring(fileData.type.indexOf('/')+1,fileData.type.length);
+                      //文件类型与大小
+                      if (!!imgageType) {
+                        if (imgageType.indexOf(type) < 0 || !fileData.type) {
+                          alert('请上传'+ imgageType +'后缀的文件!');
+                          return false;
+                        }
+                      }
+                      if(!!imgageSize){
+                        if (fileData.type > imgageSize*1024) {
+                          alert('请上传文件大小小于/等于'+ upDataFileSize +'M!');
+                          return false;
+                        }
+                      }
+
+                      img.src = blob;
+                      img.onload = function () {
+                        var imgWidth = img.width;
+                        var imgHeight = img.height;
+                        //文件尺寸
+                        if (!!imageWidth) {
+                          if (imgWidth > imageWidth) {
+                            alert('请上传文件尺寸小于/等于'+ imageWidth +'(宽)!');
+                            return false;
+                          }
+                        }
+                        if (!!imageHeight) {
+                          if ( imgHeight > imageHeight) {
+                            alert('请上传文件尺寸小于/等于'+ imageHeight +'(高)!');
+                            return false;
+                          }
+                        }
+                        //显示目标
+                        if(!!upDataElemShowId){
+                          document.getElementById(upDataElemShowId).style.backgroundImage = "url("+ blob +")";
+                        }
+                        //显示目标名称
+                        if (!!upDataElemName) {
+                          document.getElementById(upDataElemName).innerHTML = data.name
+                        }
+                        if (!!upDataElemStopId) {
+                          document.getElementById(upDataElemStopId).addEventListener('click',requestAbort, false);
+                          function requestAbort(argument) {
+                            console.log(0);
+                            request.abort();
+                          }
+                        }
+                          var startimes = new Date();
+                          if(!!upDataUrl){
+                            request = $.ajax({
+                                type: "POST",
+                                url: upDataUrl,
+                                data: fd,
+                                processData: false,
+                                contentType: false,
+                                success: function (res) {
+                                    var result = res;
+                                    console.log(result)
+                                    //是否上传成功(根据返回字段微调)
+                                    if (result.returnCode == "SUCCESS") {
+                                        $('input[name=house_path]').val(result.imgPath)
+                                    } else {
+                                    }
+                                },
+                                xhr: function (e) {
+                                  //进度流
+                                  var xhr = $.ajaxSettings.xhr();
+                        if(onprogress && xhr.upload) {
+                          xhr.upload.addEventListener("progress" , onprogress, false);
+                          return xhr;
+                        }
+                                },
+                                error: function (data) {
+                                  //提交出错
+                                }
+                            });
+                          }
+
+                      }
+                }
+                })(data);
+            }
+            $('.upDataFile').click(function (argument) {
+              //点击触发change
+              var _that = this;
+              imgageType = _that.getAttribute('data-Type'),//文件类型
+              imageWidth = _that.getAttribute('data-fileWidth'),//文件宽
+              imageHeight = _that.getAttribute('data-fileheight'),//文件高
+              upDataElemShowId = _that.getAttribute('data-elemShow'),//本地展示目标ID
+              upDataElemStopId = _that.getAttribute('data-elemStop'),//强制取消上传ID
+              upDataElemAnimationId = _that.getAttribute('data-elemAnimation'),//上传动画元素ID
+              upDataFileSize = _that.getAttribute('data-fileSize'),//文件大小单位(m)
+              upDataElemName = _that.getAttribute('data-elemName'),//文件名称
+              upDataUrl = _that.getAttribute('data-upDataUrl');//ajax提交地址
+              fileId.click();
+              if (!!upDataElemAnimationId && !!upDataElemStopId) {
+                document.getElementById(upDataElemAnimationId).style.width = 0;
+              }
+              return false;
+          });
+          function onprogress(evt){
+              var loaded = evt.loaded;     //已经上传大小情况
+              var tot = evt.total;      //附件总大小
+              var per = Math.floor(100*loaded/tot);  //已经上传的百分比
+              if (!!upDataElemAnimationId && !!upDataElemStopId) {
+                document.getElementById(upDataElemAnimationId).style.width = per + '%';
+              }
+          }
+          })
+        </script>
+    </body>
+</html>

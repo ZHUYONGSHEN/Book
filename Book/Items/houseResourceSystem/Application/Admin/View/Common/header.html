@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>腾讯街景找房</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="腾讯街景找房">
+    <meta name="author" content="Muhammad Usman">
+		<link rel="stylesheet" href="__CSS__/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="__CSS__/common.css"/>
+		<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+		<link href='__PUBLIC__/bower_components/chosen/chosen.min.css' rel='stylesheet'>
+
+
+		<script type="text/javascript" src="__JS__/jquery.min.js" ></script>
+		<script type="text/javascript" src="__JS__/bootstrap.min.js" ></script>
+
+
+
+    <!-- jQuery
+    <script src="__PUBLIC__/bower_components/jquery/jquery.min.js"></script>
+    <script src="__PUBLIC__/bower_components/chosen/chosen.jquery.min.js"></script>
+    <script src="__JS__/jquery_validate_min.js"></script>
+   	<script type="text/javascript" src="__JS__/layer/layer.js"></script>
+
+-->
+    <script src="__JS__/layer.js"></script>
+<script src="__JS__/jquery_validate_min.js"></script>
+<script src="__PUBLIC__/bower_components/chosen/chosen.jquery.min.js"></script>
+<script src="__JS__/jquery.twbsPagination.js" type="text/javascript"></script>
+<script src="__JS__/base.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="__IMG__/favicon.ico">
+</head>
+
+<body>
+<!-- topbar starts -->
+		<!--头部开始-->
+		<div class="ho-top">
+			<div class="ho-main">
+				<!--logo开始-->
+				<div class="ho-logo"><a href="/"><img src="__IMG__/logo.png"></a></div>
+				<!--logo结束-->
+				<!--导航开始-->
+				<div class="ho-nav">
+	               <ul>
+	                    <li><a href="{:U('HouseManage/houseList')}" <if condition="CONTROLLER_NAME eq  'HouseManage'"> class="active"</if>>房源管理</a></li>
+	                    <li><a href="{:U('Dictionary/index')}" <if condition="CONTROLLER_NAME eq  'Dictionary'"> class="active"</if>>楼盘字典</a></li>
+                        <li><a href="{:U('NewHouse/index')}" <in name="CONTROLLER_NAME" value="NewHouse,HouseType,City"> class="active"</in>>新房管理</a></li>
+	                     <li><a href="{:U('Log/index')}" <if condition="CONTROLLER_NAME eq  'Log'"> class="active"</if>>操作日志</a></li>
+	                </ul>
+					<div class="clear"></div>
+				</div>
+				<!--导航结束-->
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!--头部结束-->
+<!-- topbar ends -->

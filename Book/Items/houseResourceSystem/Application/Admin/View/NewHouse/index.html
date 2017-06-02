@@ -1,0 +1,216 @@
+<include file="Common:header" />
+<script type="text/javascript" src="__JS__/common.js" ></script>
+<!--主体开始-->
+        <div class="ho-main">
+          <br />
+            <div class="ho-search restoreBootstrap">
+                <form class="form-inline">
+                    <input type="hidden" id="s_adcode" name="adcode"   value="{$_GET['adcode']}"/>
+                    <div class="form-group">
+                        <select name="province_code" id="province" style="width: 90px" class="form-control">
+                            <option value="">省份</option>
+                            <volist name="province" id="vo">
+                                <option value="{$vo.adcode}">{$vo.name}</option>
+                            </volist>
+                       </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="city_code" id="city" style="width: 90px" class="form-control">
+                            <option value="">城市</option>
+                       </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="country_code" id="country" style="width: 90px" class="form-control">
+                            <option value="">区域</option>
+                       </select>
+                    </div>
+                   <div class="form-group">
+                        <select name="proxy_status" class="form-control" style="width: 105px">
+                            <option value="">代理状态</option>
+                            <option value="0">已完结</option>
+                            <option value="1">代理中</option>
+                            <option value="2">代理中止</option>
+                       </select>
+                    </div>
+                     <div class="form-group">
+                        <select name="property_type" class="form-control" style="width: 105px">
+                            <option value="">物业类型</option>
+                            <volist name="property" id="vo">
+                                <option value="{$vo.name}">{$vo.name}</option>
+                            </volist>
+                       </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="price_type" class="form-control">
+                            <option value="1">均价</option>
+                            <option value="2">总价</option>
+                       </select>
+                    </div>
+                   <div class="form-group">
+                        <input type="text" style="width: 80px" maxlength="6" name="min_price" class="form-control" placeholder="最低价">
+                    </div>
+                    <div class="form-group">
+                       <label for="">-</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" style="width: 80px" maxlength="6" name="max_price" class="form-control" placeholder="最高价">
+                    </div>
+                    <div class="form-group">
+                        <select name="source" class="form-control">
+                            <option value="">来源</option>
+                            <option value="1">合作</option>
+                            <option value="0">采集</option>
+                       </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" style="width: 169px" name="keyword" class="form-control" placeholder="项目名称">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-blue"><i class="searchNewIcon"></i> 搜索</button>
+                        <button type="reset" class="btn btn-blue"><i class="resetIcon"></i> 重置</button>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix text-right">
+              <a href="{:U('City/index')}" class="btn btn-blue">区域配置</a>
+              <a href="{:U('addNewItem')}" class="btn btn-blue">新增项目</a>
+            </div>
+            <br />
+            <div class="ho-list table-border-block border">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                              <th data-column="province">省份</th>
+                              <th data-column="city">城市</th>
+                              <th data-column="district">城区</th>
+                              <th data-column="name">项目名称</th>
+                              <th data-column="property_type" width="120px">物业类型</th>
+                              <th data-column="proxy_status">代理状态</th>
+                              <th data-column="sale_total">余量</th>
+                              <th data-column="pay">首付</th>
+                              <th data-column="com">佣金</th>
+                              <th data-column="average_min">均价(元/m²)</th>
+                              <th data-column="sum">总价（万）</th>
+                              <th data-column="source">来源</th>
+                              <th data-column="status">上下架状态</th>
+                              <th data-func="acturl" width="180px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="ho-row">{$page}</div>
+            </div>
+        </div>
+        <div  class="close_del_up_mian" style="display:none;">
+            <div>
+                <p class="alert_title border-bottom">提示信息</p>
+                <div class="text-center padding30">
+                    是否确定删除该房源数据?
+                </div>
+            </div>
+        </div>
+        <div class="promptBox" style="display:none;"><p class="background-white"></p></div>
+        <script>
+          //返回操作按钮
+          function acturl(response) {
+              var str = ''
+                  if (response.state == 1) {
+                    str+= '<a data-id="'+ response.id +'" data-type="0" class="btn actionStare">下架</a>'
+                  }else{
+                    str+= '<a data-id="'+ response.id +'" data-type="1" class="btn actionStare">上架</a>'
+                  }
+                  str+= '<a href="{:U("detail")}?id='+ response.id +'" class="btn">编辑</a>'
+                  str+= '<a data-id="'+ response.id +'" class="btn delMessage">删除</a>'
+              return str;
+          }
+          // 修改房源上下架状态
+          $('body').on('click', '.actionStare', function(){
+            var btn      = $(this)
+            var thisText = btn.text();
+            var status   = btn.attr('data-type');
+            var id       = btn.attr('data-id');
+            var html     = btn.parent().prev('td')
+            $.post("{:U('changeHouseStatus')}", {id: id, type: status}, function(res){
+              // 根据返回值显示tips
+              res.status == true ? promptBoxHidden(thisText+"成功!") : promptBoxHidden(thisText+"失败!")
+              // 根据更改的状态页面ajax修改数据
+              if (status == 0) {
+                btn.attr('data-type', 1).html('上架')
+                html.html('已下架')
+              }else{
+                btn.attr('data-type', 0).html('下架')
+                html.html('上架中')
+              }
+            })
+          });
+          // 删除(隐藏)房源
+          $('body').on('click', '.delMessage', function(){
+            var that = $(this)
+            var id   = that.attr('data-id')
+            alertbox({
+              msg: $('.close_del_up_mian').html(),
+              tcallfn_tx:'删除',
+              alerttap:1,
+              tcallfn:function(){
+                $.post("{:U('delHouse')}", {id: id}, function(response) {
+                    if(response.status == 1) {
+                        promptBoxHidden("删除成功!")
+                        that.parent().parent().hide()
+                    }else {
+                        promptBoxHidden("删除失败!")
+                    }
+                }, 'json');
+              }
+            })
+          });
+          // 城市三级联动-copy
+          var cityUrl = "{:U('getCitys')}";
+          var countryUrl = "{:U('getCountrys')}";
+          var selector_province = '#province';
+          var selector_city = '#city';
+          var selector_country = '#country';
+          // 记忆所选市省区，用于列表查询
+          var selected_province = "{$_GET['province_code']}";
+          var selected_city = "{$_GET['city_code']}";
+          var selected_country = "{$_GET['country_code']}";
+          if(selected_province) {
+              $(selector_province).val(selected_province);
+              fnGetCity(selector_province, selected_city, selector_city, function() {
+                  if(selected_city) {
+                      $(selector_city).val(selected_city);
+                  }
+                  fnGetCountry(selector_city, selected_country, selector_country, function() {
+                      if(selected_country) {
+                          $(selector_country).val(selected_country);
+                      }
+                  });
+              });
+          }
+          // select chosen插件值改变事件
+          $(selector_province).change(function() {
+              $('#s_adcode').val($(this).val());
+              fnGetCity(selector_province, selected_city, selector_city, function() { $(selector_country).html('<option value="">请选择区域</option>');});
+          });
+          $(selector_city).change(function() {
+              $('#s_adcode').val($(this).val());
+              fnGetCountry(selector_city, selected_country, selector_country);
+          });
+          $(selector_country).change(function() {
+              $('#s_adcode').val($(this).val());
+          });
+          // 搜索记录
+          $('select[name=province_code]').val({$_GET['province_code']})
+          $('select[name=city_code]').val({$_GET['city_code']})
+          $('select[name=country_code]').val({$_GET['country_code']})
+          $('select[name=proxy_status]').val({$_GET['proxy_status']})
+          $('select[name=property_type]').val("{$_GET['property_type']}")
+          $('select[name=price_type]').val({$_GET['price_type']})
+          $('input[name=min_price]').val({$_GET['min_price']})
+          $('input[name=max_price]').val({$_GET['max_price']})
+          $('select[name=source]').val({$_GET['source']})
+          $('input[name=keyword]').val({$_GET['keyword']})
+        </script>
+    </body>
+</html>
